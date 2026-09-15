@@ -15,7 +15,7 @@ export const AUTHORS = {
     name: "Asmit Choudhary",
     slug: "asmit-choudhary",
     bio:
-      "Asmit Choudhary holds a B.Tech in Mechanical Engineering from IIT Roorkee and built Business Listing Management. He previously interned at Ninjacart (Product Analytics & Operations) and at Deloitte. He writes practical guidance on NAP accuracy, directory coverage, duplicate cleanup, and multi-location operations for teams that need every storefront accurate across Google, Apple, Bing, MapQuest, and the directory network.",
+      "Asmit Choudhary built Business Listing Management. An IIT Roorkee B.Tech with stints at Ninjacart and Deloitte, he writes for multi-location operators who need NAP, coverage, and duplicates handled without the spreadsheet.",
     linkedinUrl: "https://www.linkedin.com/in/asmit-c/",
     imageSrc: "/team/asmit-choudhary.jpg",
     imageWebpSrc: "/team/asmit-choudhary.webp",
@@ -26,7 +26,7 @@ export const AUTHORS = {
     name: "Sandeep Kumar",
     slug: "sandeep-kumar",
     bio:
-      "Sandeep Kumar previously worked as an SEO Intern at Tosh Innovations and as an Internship Trainee at Hyper Adam. He writes practical guides on business listing management, local SEO, and keeping multi-location NAP and directory data accurate.",
+      "Sandeep Kumar writes about business listing management and local SEO. With prior SEO work at Tosh Innovations and Hyper Adam, he focuses on practical guidance for teams that need clean NAP, directory coverage, and multi-location data they can trust.",
     linkedinUrl: "https://www.linkedin.com/in/marketingbysandeep",
     imageSrc: "/team/sandeep-kumar.jpg",
     imageWebpSrc: "/team/sandeep-kumar.webp",
