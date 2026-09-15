@@ -1,6 +1,11 @@
 {
   "redirects": [
     {
+      "source": "/llm.txt",
+      "destination": "/llms.txt",
+      "permanent": true
+    },
+    {
       "source": "/features",
       "destination": "/product",
       "permanent": true
