@@ -27,7 +27,7 @@ export function AuthorBlock({ author }: { author: AuthorProfile }) {
                   alt={author.imageAlt}
                   width={84}
                   height={84}
-                  className="size-full object-cover"
+                  className="size-full object-cover object-center"
                   loading="lazy"
                   decoding="async"
                 />
