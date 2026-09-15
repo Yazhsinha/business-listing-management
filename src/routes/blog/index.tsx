@@ -20,12 +20,13 @@ export const Route = createFileRoute("/blog/")({
 
 function BlogIndex() {
   const data = Route.useLoaderData();
-  const bySlug = new Map(BLOG_POSTS.map((p) => [p.slug, toCard(p)]));
-  for (const article of data.articles) {
-    if (article.status !== "published") continue;
-    bySlug.set(article.slug, toCard(article)); // CMS wins on slug collision
-  }
-  const posts = [...bySlug.values()].sort((a, b) => b.date.localeCompare(a.date));
+  // When CMS has published rows, they are the listing source of truth.
+  // Merging static BLOG_POSTS kept old slugs live after desk renames.
+  const posts = (
+    data.articles.length
+      ? data.articles.filter((a) => a.status === "published").map(toCard)
+      : BLOG_POSTS.map(toCard)
+  ).sort((a, b) => b.date.localeCompare(a.date));
 
   return (
     <SiteShell>

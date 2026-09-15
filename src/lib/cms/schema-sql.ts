@@ -82,4 +82,17 @@ alter table cms_articles add column if not exists canonical_url text not null de
 alter table cms_articles add column if not exists published_at text not null default '';
 alter table cms_articles add column if not exists category text not null default '';
 alter table cms_articles add column if not exists cover_alt text not null default '';
+
+create table if not exists cms_redirects (
+  from_slug text primary key,
+  to_slug text not null,
+  article_id text,
+  updated_at timestamptz not null default now()
+);
+create index if not exists cms_redirects_to_slug_idx on cms_redirects (to_slug);
+alter table cms_redirects enable row level security;
+drop policy if exists "public read redirects" on cms_redirects;
+create policy "public read redirects"
+  on cms_redirects for select
+  using (true);
 `;

@@ -146,7 +146,15 @@ export const loadPublicArticle = createServerFn({ method: "GET" })
       return payload;
     };
     try {
-      const { getArticleBySlug } = await import("./store");
+      const { getArticleBySlug, getArticleRedirect } = await import("./store");
+      // Desk slug renames: honor cms_redirects before CMS/static so old URLs never 200.
+      const redirected = await Promise.race([
+        getArticleRedirect(data.slug),
+        new Promise<null>((resolve) => setTimeout(() => resolve(null), 2_000)),
+      ]);
+      if (redirected) {
+        return { source: "redirect" as const, redirectTo: redirected, article: null as unknown as CmsArticle, markdown: "" };
+      }
       // Skip seedCmsIfEmpty on public article path for snappy TTFB.
       const cms = await Promise.race([
         getArticleBySlug(data.slug, true),

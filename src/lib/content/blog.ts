@@ -23,7 +23,7 @@ export const BLOG_POSTS: BlogPost[] = [
       "Business listing management is the ongoing process of creating, verifying, and synchronizing a company's name, address, phone (NAP), hours, and categories across search engines, maps, and online directories so every location stays accurate. BLM does that for Google, Apple, Bing, and the directory network from one workspace.",
   },
   {
-    slug: "business-listing-management-cost-2026",
+    slug: "business-listing-management-pricing-2026",
     title: "Business listing management cost in 2026",
     description:
       "Business listing management cost in 2026: Starter $49/mo, Growth $149/mo for up to 25 locations, plus labor and the hidden cost of NAP drift.",

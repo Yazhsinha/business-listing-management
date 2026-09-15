@@ -1,4 +1,4 @@
-import { createFileRoute, Link, notFound } from "@tanstack/react-router";
+import { createFileRoute, Link, notFound, redirect } from "@tanstack/react-router";
 import { SiteShell } from "@/components/layout/site-shell";
 import { Markdown } from "@/components/markdown";
 import { ArticleHtml } from "@/components/article-html";
@@ -22,6 +22,14 @@ export const Route = createFileRoute("/blog/$slug")({
   loader: async ({ params }) => {
     const data = await loadPublicArticle({ data: { slug: params.slug } });
     if (!data) throw notFound();
+    if (data.source === "redirect" && data.redirectTo) {
+      throw redirect({
+        to: "/blog/$slug",
+        params: { slug: data.redirectTo },
+        statusCode: 301,
+      });
+    }
+    if (!data.article) throw notFound();
     return data;
   },
   head: ({ loaderData }) => {

@@ -384,6 +384,86 @@ export async function getArticleBySlug(slug: string, onlyPublished = false) {
   return rows[0] ? asArticle(rows[0]) : null;
 }
 
+
+export async function getArticleRedirect(fromSlug: string): Promise<string | null> {
+  const slug = fromSlug.trim();
+  if (!slug) return null;
+  const sb = await sbAdmin();
+  if (sb) {
+    const { data, error } = await sb
+      .from("cms_redirects")
+      .select("to_slug")
+      .eq("from_slug", slug)
+      .maybeSingle();
+    if (error) return null;
+    const to = data?.to_slug ? String(data.to_slug).trim() : "";
+    return to && to !== slug ? to : null;
+  }
+  const sql = await localSql();
+  if (!sql) return null;
+  try {
+    const rows = await sql<{ to_slug: string }>`
+      select to_slug from cms_redirects where from_slug = ${slug} limit 1
+    `;
+    const to = rows[0]?.to_slug?.trim() ?? "";
+    return to && to !== slug ? to : null;
+  } catch {
+    return null;
+  }
+}
+
+/** Record from→to and retarget any redirects that previously pointed at `from`. */
+export async function recordArticleSlugRedirect(opts: {
+  fromSlug: string;
+  toSlug: string;
+  articleId?: string;
+}) {
+  const fromSlug = opts.fromSlug.trim();
+  const toSlug = opts.toSlug.trim();
+  if (!fromSlug || !toSlug || fromSlug === toSlug) return;
+  const articleId = opts.articleId ? String(opts.articleId) : null;
+  const sb = await sbAdmin();
+  if (sb) {
+    try {
+      await sb.from("cms_redirects").upsert({
+        from_slug: fromSlug,
+        to_slug: toSlug,
+        article_id: articleId,
+        updated_at: new Date().toISOString(),
+      });
+      // Chain: anything that pointed at the old slug now points at the new one.
+      await sb.from("cms_redirects").update({
+        to_slug: toSlug,
+        updated_at: new Date().toISOString(),
+      }).eq("to_slug", fromSlug);
+      // Never keep a self-loop if something redirected onto fromSlug then got retargeted.
+      await sb.from("cms_redirects").delete().eq("from_slug", toSlug).eq("to_slug", toSlug);
+    } catch {
+      /* table may not exist yet on a fresh env — migrate on next deploy */
+    }
+    return;
+  }
+  const sql = await localSql();
+  if (!sql) return;
+  try {
+    await sql`
+      insert into cms_redirects (from_slug, to_slug, article_id, updated_at)
+      values (${fromSlug}, ${toSlug}, ${articleId}, now())
+      on conflict (from_slug) do update
+        set to_slug = excluded.to_slug,
+            article_id = coalesce(excluded.article_id, cms_redirects.article_id),
+            updated_at = now()
+    `;
+    await sql`
+      update cms_redirects set to_slug = ${toSlug}, updated_at = now()
+      where to_slug = ${fromSlug} and from_slug <> ${toSlug}
+    `;
+    await sql`delete from cms_redirects where from_slug = ${toSlug} and to_slug = ${toSlug}`;
+  } catch {
+    /* ignore if table missing */
+  }
+}
+
 export async function listPublished(kind?: ArticleKind) {
   const sb = await sbAdmin();
   if (sb) {
@@ -427,6 +507,16 @@ export type ArticleInput = {
 
 export async function saveArticle(input: ArticleInput) {
   const id = input.id || crypto.randomUUID();
+  // Capture previous slug before upsert so desk renames persist as public redirects.
+  let previousSlug = "";
+  if (input.id) {
+    try {
+      const prev = await getArticle(input.id);
+      previousSlug = prev?.slug?.trim() ?? "";
+    } catch {
+      previousSlug = "";
+    }
+  }
   const meta_title = (input.meta_title ?? "").trim();
   const canonical_url = (input.canonical_url ?? "").trim();
   const category = (input.category ?? "").trim();
@@ -535,6 +625,15 @@ export async function saveArticle(input: ArticleInput) {
       }
     }
 
+
+    if (previousSlug && previousSlug !== input.slug.trim()) {
+      await recordArticleSlugRedirect({
+        fromSlug: previousSlug,
+        toSlug: input.slug.trim(),
+        articleId: String(payload.id),
+      });
+    }
+
     try {
       const saved = await withTimeout(getArticle(String(payload.id)), 5_000, "reload article");
       if (saved) return saved;
@@ -551,6 +650,14 @@ export async function saveArticle(input: ArticleInput) {
     if (existing[0]) payload.id = existing[0].id;
   }
   const resolvedId = existing[0]?.id ?? id;
+  if (!previousSlug && existing[0]) {
+    try {
+      const rows = await sql<{ slug: string }>`select slug from cms_articles where id = ${resolvedId} limit 1`;
+      previousSlug = rows[0]?.slug?.trim() ?? "";
+    } catch {
+      /* ignore */
+    }
+  }
   const tags = payload.tags;
   if (existing[0]) {
     try {
@@ -623,6 +730,13 @@ export async function saveArticle(input: ArticleInput) {
     }
   }
   payload.id = resolvedId;
+  if (previousSlug && previousSlug !== input.slug.trim()) {
+    await recordArticleSlugRedirect({
+      fromSlug: previousSlug,
+      toSlug: input.slug.trim(),
+      articleId: String(resolvedId),
+    });
+  }
   try {
     const saved = await getArticle(resolvedId);
     if (saved) return saved;
@@ -797,22 +911,11 @@ export function homepageLiveArticles(articles: Awaited<ReturnType<typeof listArt
     });
   const top = published.slice(0, 6);
   if (top.length >= 6) return top;
-  if (!top.length) {
-    const bySlug = new Map(articles.filter((a) => a.status === "published").map((a) => [a.slug, a]));
-    return BLOG_POSTS.map((p) => bySlug.get(p.slug)).filter((a): a is NonNullable<typeof a> => Boolean(a)).slice(0, 6);
-  }
-  const have = new Set(top.map((a) => a.slug));
+  // When CMS already has published articles, do not pad with static BLOG_POSTS —
+  // padding re-surfaces old slugs after a desk rename (e.g. cost-2026 vs pricing-2026).
+  if (top.length) return top;
   const bySlug = new Map(articles.filter((a) => a.status === "published").map((a) => [a.slug, a]));
-  for (const post of BLOG_POSTS) {
-    if (top.length >= 6) break;
-    if (have.has(post.slug)) continue;
-    const row = bySlug.get(post.slug);
-    if (row) {
-      top.push(row);
-      have.add(post.slug);
-    }
-  }
-  return top;
+  return BLOG_POSTS.map((p) => bySlug.get(p.slug)).filter((a): a is NonNullable<typeof a> => Boolean(a)).slice(0, 6);
 }
 
 export async function listLeads() {
@@ -857,7 +960,14 @@ export function expectedLibrarySlugs() {
 export async function missingLibrarySlugs() {
   const existing = await listArticles();
   const have = new Set(existing.map((a) => a.slug));
-  return BLOG_POSTS.filter((p) => !have.has(p.slug)).map((p) => p.slug);
+  const missing: string[] = [];
+  for (const p of BLOG_POSTS) {
+    if (have.has(p.slug)) continue;
+    const redirected = await getArticleRedirect(p.slug);
+    if (redirected) continue; // CMS owns a renamed article
+    missing.push(p.slug);
+  }
+  return missing;
 }
 
 /**
@@ -871,8 +981,12 @@ export async function seedLibrary() {
   let added = 0;
   let updated = 0;
   for (const post of BLOG_POSTS) {
-    const body_html = markdownToHtml(POST_BODY[post.slug] ?? "");
     const prev = bySlug.get(post.slug);
+    if (!prev) {
+      const redirected = await getArticleRedirect(post.slug);
+      if (redirected) continue; // desk renamed away from this static slug
+    }
+    const body_html = markdownToHtml(POST_BODY[post.slug] ?? "");
     await saveArticle({
       id: prev?.id,
       slug: post.slug,

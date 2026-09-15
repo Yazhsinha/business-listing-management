@@ -438,20 +438,11 @@ function Resources() {
       if (byDate) return byDate;
       return (b.updated_at || "").localeCompare(a.updated_at || "");
     });
+  // CMS published list is authoritative. Do not pad with static seeds after a slug rename.
   const cards =
     cms.length > 0
       ? cms.slice(0, 6).map(toCard)
       : BLOG_POSTS.slice(0, 6).map(toCard);
-  // If CMS has some but fewer than 6, fill from bundled posts not already listed.
-  if (cms.length > 0 && cards.length < 6) {
-    const have = new Set(cards.map((c) => c.slug));
-    for (const post of BLOG_POSTS) {
-      if (cards.length >= 6) break;
-      if (have.has(post.slug)) continue;
-      cards.push(toCard(post));
-      have.add(post.slug);
-    }
-  }
 
   return (
     <section className="page-wrap py-16 sm:py-24" aria-labelledby="resources-title">

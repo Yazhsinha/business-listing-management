@@ -60,7 +60,7 @@ function PricingPage() {
           Business listing management cost on BLM is listed SaaS plus the labor to close alerts: Starter at $49/month for one location, Growth at $149/month for up to 25 locations, Enterprise custom. Billing is not live yet. Start a free trial or book a call. For the planning model (DIY hours, agency retainers, drift), read{" "}
           <Link
             to="/blog/$slug"
-            params={{ slug: "business-listing-management-cost-2026" }}
+            params={{ slug: "business-listing-management-pricing-2026" }}
             className="font-medium text-ink underline-offset-2 hover:underline"
           >
             business listing management cost in 2026

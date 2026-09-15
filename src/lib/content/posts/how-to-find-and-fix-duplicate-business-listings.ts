@@ -89,7 +89,7 @@ Suppression is the middle of the business listing management job, not the end.
 - Close the source process that created the fork (old citation sheet, franchisee habit).
 - Do not blast new citations until the survivor is clean.
 
-For footprint and budget, duplicates change the cleanup line more than the software line. Ten locations with forks are a project; ten clean locations are a subscription. Numbers are in [business listing management cost in 2026](https://businesslistingmanagement.com/blog/business-listing-management-cost-2026) and on [pricing](/pricing): Starter at $49/month after trial, Growth at $149/month for up to 25 locations, Enterprise for bulk workflow at scale.
+For footprint and budget, duplicates change the cleanup line more than the software line. Ten locations with forks are a project; ten clean locations are a subscription. Numbers are in [business listing management cost in 2026](https://businesslistingmanagement.com/blog/business-listing-management-pricing-2026) and on [pricing](/pricing): Starter at $49/month after trial, Growth at $149/month for up to 25 locations, Enterprise for bulk workflow at scale.
 
 If you only remember four verbs: find, match, suppress, keep reviews. Everything else is publisher-specific paperwork.
 
