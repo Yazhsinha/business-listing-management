@@ -26,7 +26,7 @@ export const AUTHORS = {
     name: "Sandeep Kumar",
     slug: "sandeep-kumar",
     bio:
-      "Sandeep Kumar is Content and Community at Nakama Growth in Delhi. He previously worked as an SEO Intern at Tosh Innovations and as an Internship Trainee at Hyper Adam. He writes and supports practical content across Nakama’s independent listing and local SEO publications.",
+      "Sandeep Kumar previously worked as an SEO Intern at Tosh Innovations and as an Internship Trainee at Hyper Adam. He writes and supports practical content across Nakama’s independent listing and local SEO publications.",
     linkedinUrl: "https://www.linkedin.com/in/marketingbysandeep",
     imageSrc: "/team/sandeep-kumar.jpg",
     imageWebpSrc: "/team/sandeep-kumar.webp",
