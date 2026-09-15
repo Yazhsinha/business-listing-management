@@ -1,4 +1,4 @@
-import { createFileRoute, Link, notFound, redirect } from "@tanstack/react-router";
+import { createFileRoute, notFound, redirect } from "@tanstack/react-router";
 import { SiteShell } from "@/components/layout/site-shell";
 import { Markdown } from "@/components/markdown";
 import { ArticleHtml } from "@/components/article-html";
@@ -16,7 +16,8 @@ import {
   publicOrigin,
 } from "@/lib/seo";
 import { SITE } from "@/lib/site";
-import { Button } from "@/components/ui/button";
+import { resolveAuthor } from "@/lib/authors";
+import { AuthorBlock } from "@/components/blog/author-block";
 
 export const Route = createFileRoute("/blog/$slug")({
   loader: async ({ params }) => {
@@ -63,6 +64,7 @@ function BlogPostPage() {
       ? stripDuplicateMarkdownOpener(markdown, answer)
       : markdown;
   const shareImage = absoluteShareImage(article.cover_url, publicOrigin(), defaultShareImage());
+  const author = resolveAuthor(article.author);
 
   return (
     <SiteShell>
@@ -122,23 +124,7 @@ function BlogPostPage() {
             <ArticleHtml html={article.body_html} answer={answer} title={article.title} />
           )}
         </div>
-        <div className="mt-14 rounded-2xl bg-mint-soft px-6 py-7 hairline sm:px-8">
-          <h2 className="font-display text-xl font-semibold tracking-tight text-ink sm:text-2xl">
-            Run this against a real location
-          </h2>
-          <p className="mt-2 max-w-xl text-sm leading-relaxed text-ink-soft">
-            Start a free trial to run this against a real location. The auditor lives behind sign-in so the score
-            is yours.
-          </p>
-          <div className="mt-5 flex flex-wrap gap-3">
-            <Button asChild>
-              <Link to="/trial">Start free trial</Link>
-            </Button>
-            <Button asChild variant="secondary">
-              <Link to="/pricing">See pricing</Link>
-            </Button>
-          </div>
-        </div>
+        <AuthorBlock author={author} />
       </article>
     </SiteShell>
   );
