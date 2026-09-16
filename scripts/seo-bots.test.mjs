@@ -18,3 +18,29 @@ test("absoluteShareImage resolves relative and absolute", () => {
     "https://cdn.example/a.png",
   );
 });
+
+import {
+  isVercelAppHost,
+  isIndexableMarketingHost,
+  robotsTxtForHost,
+  deploymentRobotsMeta,
+} from "../src/lib/public-host.ts";
+
+test("vercel.app hosts are not indexable", () => {
+  assert.equal(isVercelAppHost("blm-pied.vercel.app"), true);
+  assert.equal(isIndexableMarketingHost("blm-pied.vercel.app"), false);
+  assert.equal(isIndexableMarketingHost("businesslistingmanagement.com"), true);
+  assert.equal(isIndexableMarketingHost("www.businesslistingmanagement.com"), false);
+  assert.match(robotsTxtForHost("blm-git-abc.vercel.app"), /Disallow: \//);
+  assert.match(robotsTxtForHost("businesslistingmanagement.com"), /Allow: \//);
+  assert.match(robotsTxtForHost("businesslistingmanagement.com"), /Sitemap:/);
+});
+
+test("deploymentRobotsMeta only for preview/development", () => {
+  const prev = process.env.VERCEL_ENV;
+  process.env.VERCEL_ENV = "preview";
+  assert.equal(deploymentRobotsMeta(), "noindex, nofollow");
+  process.env.VERCEL_ENV = "production";
+  assert.equal(deploymentRobotsMeta(), undefined);
+  process.env.VERCEL_ENV = prev;
+});

@@ -25,6 +25,7 @@ import { Route as PricingRouteImport } from './routes/pricing'
 import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as ProductRouteImport } from './routes/product'
 import { Route as ResourcesRouteImport } from './routes/resources'
+import { Route as RobotsDottxtRouteImport } from './routes/robots[.]txt'
 import { Route as SecurityRouteImport } from './routes/security'
 import { Route as SignupRouteImport } from './routes/signup'
 import { Route as TermsRouteImport } from './routes/terms'
@@ -124,6 +125,11 @@ const ProductRoute = ProductRouteImport.update({
 const ResourcesRoute = ResourcesRouteImport.update({
   id: '/resources',
   path: '/resources',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RobotsDottxtRoute = RobotsDottxtRouteImport.update({
+  id: '/robots.txt',
+  path: '/robots.txt',
   getParentRoute: () => rootRouteImport,
 } as any)
 const SecurityRoute = SecurityRouteImport.update({
@@ -248,6 +254,7 @@ export interface FileRoutesByFullPath {
   '/privacy': typeof PrivacyRoute
   '/product': typeof ProductRoute
   '/resources': typeof ResourcesRoute
+  '/robots.txt': typeof RobotsDottxtRoute
   '/security': typeof SecurityRoute
   '/signup': typeof SignupRoute
   '/terms': typeof TermsRoute
@@ -286,6 +293,7 @@ export interface FileRoutesByTo {
   '/privacy': typeof PrivacyRoute
   '/product': typeof ProductRoute
   '/resources': typeof ResourcesRoute
+  '/robots.txt': typeof RobotsDottxtRoute
   '/security': typeof SecurityRoute
   '/signup': typeof SignupRoute
   '/terms': typeof TermsRoute
@@ -325,6 +333,7 @@ export interface FileRoutesById {
   '/privacy': typeof PrivacyRoute
   '/product': typeof ProductRoute
   '/resources': typeof ResourcesRoute
+  '/robots.txt': typeof RobotsDottxtRoute
   '/security': typeof SecurityRoute
   '/signup': typeof SignupRoute
   '/terms': typeof TermsRoute
@@ -365,6 +374,7 @@ export interface FileRouteTypes {
     | '/privacy'
     | '/product'
     | '/resources'
+    | '/robots.txt'
     | '/security'
     | '/signup'
     | '/terms'
@@ -403,6 +413,7 @@ export interface FileRouteTypes {
     | '/privacy'
     | '/product'
     | '/resources'
+    | '/robots.txt'
     | '/security'
     | '/signup'
     | '/terms'
@@ -441,6 +452,7 @@ export interface FileRouteTypes {
     | '/privacy'
     | '/product'
     | '/resources'
+    | '/robots.txt'
     | '/security'
     | '/signup'
     | '/terms'
@@ -480,6 +492,7 @@ export interface RootRouteChildren {
   PrivacyRoute: typeof PrivacyRoute
   ProductRoute: typeof ProductRoute
   ResourcesRoute: typeof ResourcesRoute
+  RobotsDottxtRoute: typeof RobotsDottxtRoute
   SecurityRoute: typeof SecurityRoute
   SignupRoute: typeof SignupRoute
   TermsRoute: typeof TermsRoute
@@ -614,6 +627,13 @@ declare module '@tanstack/react-router' {
       path: '/resources'
       fullPath: '/resources'
       preLoaderRoute: typeof ResourcesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/robots.txt': {
+      id: '/robots.txt'
+      path: '/robots.txt'
+      fullPath: '/robots.txt'
+      preLoaderRoute: typeof RobotsDottxtRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/security': {
@@ -776,6 +796,7 @@ const rootRouteChildren: RootRouteChildren = {
   PrivacyRoute: PrivacyRoute,
   ProductRoute: ProductRoute,
   ResourcesRoute: ResourcesRoute,
+  RobotsDottxtRoute: RobotsDottxtRoute,
   SecurityRoute: SecurityRoute,
   SignupRoute: SignupRoute,
   TermsRoute: TermsRoute,
@@ -800,12 +821,3 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { createStart } from '@tanstack/react-start'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-  }
-}

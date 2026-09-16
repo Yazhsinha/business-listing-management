@@ -1,4 +1,5 @@
 import { SITE } from "@/lib/site";
+import { deploymentRobotsMeta } from "@/lib/public-host";
 
 export const OG_IMAGE_PATH = "/og.png";
 export const OG_IMAGE_WIDTH = "1280";
@@ -70,11 +71,12 @@ export function pageHead(opts: {
     (opts.canonical || "").trim() ||
     (opts.path ? `${SITE.domain}${opts.path}` : "");
   const image = opts.image || defaultShareImage();
+  const robots = opts.robots || deploymentRobotsMeta();
   return {
     meta: [
       { title: pageTitle(opts.title) },
       { name: "description", content: description },
-      ...(opts.robots ? [{ name: "robots", content: opts.robots }] : []),
+      ...(robots ? [{ name: "robots", content: robots }] : []),
       ...shareMeta({ ...opts, image }),
     ],
     links: [

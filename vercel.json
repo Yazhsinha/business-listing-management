@@ -1,6 +1,50 @@
 {
   "redirects": [
     {
+      "source": "/:path*",
+      "has": [
+        {
+          "type": "host",
+          "value": "www.businesslistingmanagement.com"
+        }
+      ],
+      "destination": "https://businesslistingmanagement.com/:path*",
+      "statusCode": 308
+    },
+    {
+      "source": "/",
+      "has": [
+        {
+          "type": "host",
+          "value": "www.businesslistingmanagement.com"
+        }
+      ],
+      "destination": "https://businesslistingmanagement.com/",
+      "statusCode": 308
+    },
+    {
+      "source": "/:path*",
+      "has": [
+        {
+          "type": "host",
+          "value": "blm-pied.vercel.app"
+        }
+      ],
+      "destination": "https://businesslistingmanagement.com/:path*",
+      "statusCode": 308
+    },
+    {
+      "source": "/",
+      "has": [
+        {
+          "type": "host",
+          "value": "blm-pied.vercel.app"
+        }
+      ],
+      "destination": "https://businesslistingmanagement.com/",
+      "statusCode": 308
+    },
+    {
       "source": "/llm.txt",
       "destination": "/llms.txt",
       "permanent": true
@@ -39,93 +83,148 @@
       "source": "/best",
       "destination": "/blog/best-business-listing-management-software-2026",
       "permanent": true
-    },
-    {
-      "source": "/:path*",
-      "has": [{ "type": "host", "value": "www.businesslistingmanagement.com" }],
-      "destination": "https://businesslistingmanagement.com/:path*",
-      "permanent": true
     }
   ],
   "rewrites": [
     {
       "source": "/robots.txt",
-      "has": [{ "type": "host", "value": "blm-pied.vercel.app" }],
+      "has": [
+        {
+          "type": "host",
+          "value": "blm-pied.vercel.app"
+        }
+      ],
       "destination": "/robots.preview.txt"
     }
   ],
   "headers": [
     {
+      "source": "/(.*)",
+      "has": [
+        {
+          "type": "host",
+          "value": "blm-pied.vercel.app"
+        }
+      ],
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow"
+        }
+      ]
+    },
+    {
+      "source": "/",
+      "has": [
+        {
+          "type": "host",
+          "value": "blm-pied.vercel.app"
+        }
+      ],
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow"
+        }
+      ]
+    },
+    {
       "source": "/admin/(.*)",
       "headers": [
-        { "key": "Cache-Control", "value": "private, no-store" }
+        {
+          "key": "Cache-Control",
+          "value": "private, no-store"
+        }
       ]
     },
     {
       "source": "/admin",
       "headers": [
-        { "key": "Cache-Control", "value": "private, no-store" }
+        {
+          "key": "Cache-Control",
+          "value": "private, no-store"
+        }
       ]
     },
     {
       "source": "/",
       "headers": [
-        { "key": "Cache-Control", "value": "public, s-maxage=300, stale-while-revalidate=600" }
+        {
+          "key": "Cache-Control",
+          "value": "public, s-maxage=300, stale-while-revalidate=600"
+        }
       ]
     },
     {
       "source": "/blog",
       "headers": [
-        { "key": "Cache-Control", "value": "public, s-maxage=300, stale-while-revalidate=600" }
+        {
+          "key": "Cache-Control",
+          "value": "public, s-maxage=300, stale-while-revalidate=600"
+        }
       ]
     },
     {
       "source": "/blog/(.*)",
       "headers": [
-        { "key": "Cache-Control", "value": "public, s-maxage=300, stale-while-revalidate=600" }
+        {
+          "key": "Cache-Control",
+          "value": "public, s-maxage=300, stale-while-revalidate=600"
+        }
       ]
     },
     {
       "source": "/pricing",
       "headers": [
-        { "key": "Cache-Control", "value": "public, s-maxage=300, stale-while-revalidate=600" }
+        {
+          "key": "Cache-Control",
+          "value": "public, s-maxage=300, stale-while-revalidate=600"
+        }
       ]
     },
     {
       "source": "/resources",
       "headers": [
-        { "key": "Cache-Control", "value": "public, s-maxage=300, stale-while-revalidate=600" }
+        {
+          "key": "Cache-Control",
+          "value": "public, s-maxage=300, stale-while-revalidate=600"
+        }
       ]
     },
     {
       "source": "/product",
       "headers": [
-        { "key": "Cache-Control", "value": "public, s-maxage=300, stale-while-revalidate=600" }
+        {
+          "key": "Cache-Control",
+          "value": "public, s-maxage=300, stale-while-revalidate=600"
+        }
       ]
     },
     {
       "source": "/how-it-works",
       "headers": [
-        { "key": "Cache-Control", "value": "public, s-maxage=300, stale-while-revalidate=600" }
+        {
+          "key": "Cache-Control",
+          "value": "public, s-maxage=300, stale-while-revalidate=600"
+        }
       ]
     },
     {
       "source": "/compare",
       "headers": [
-        { "key": "Cache-Control", "value": "public, s-maxage=300, stale-while-revalidate=600" }
+        {
+          "key": "Cache-Control",
+          "value": "public, s-maxage=300, stale-while-revalidate=600"
+        }
       ]
     },
     {
       "source": "/compare/(.*)",
       "headers": [
-        { "key": "Cache-Control", "value": "public, s-maxage=300, stale-while-revalidate=600" }
-      ]
-    },
-    {
-      "source": "/(.*)",
-      "has": [{ "type": "host", "value": "blm-pied.vercel.app" }],
-      "headers": [
-        { "key": "X-Robots-Tag", "value": "noindex, nofollow" }
+        {
+          "key": "Cache-Control",
+          "value": "public, s-maxage=300, stale-while-revalidate=600"
+        }
       ]
     }
   ]

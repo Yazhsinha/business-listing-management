@@ -5,6 +5,7 @@ import { Toaster } from "sonner";
 import appCss from "../styles.css?url";
 import { SITE } from "@/lib/site";
 import { defaultShareImage, shareMeta } from "@/lib/seo";
+import { deploymentRobotsMeta } from "@/lib/public-host";
 import { NotFound } from "@/components/not-found";
 
 const FONT_CSS =
@@ -13,7 +14,9 @@ const FONT_CSS =
 export const Route = createRootRoute({
   // Session is resolved client-side via Better Auth useSession (AuthSlot).
   // A root beforeLoad that awaited getSession blocked every soft navigation.
-  head: () => ({
+  head: () => {
+    const robots = deploymentRobotsMeta();
+    return {
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
@@ -21,6 +24,7 @@ export const Route = createRootRoute({
       { name: "description", content: SITE.description },
       { name: "theme-color", content: "#f4f1ea" },
       { name: "google-site-verification", content: "SANgNulrO0igNLnWomn54tf-G9uZr7EsL01oN56JWwo" },
+      ...(robots ? [{ name: "robots", content: robots }] : []),
       ...shareMeta({ title: SITE.name, description: SITE.description, path: "/" }),
     ],
     links: [
@@ -38,7 +42,8 @@ export const Route = createRootRoute({
       { rel: "preload", as: "style", href: FONT_CSS },
       { rel: "stylesheet", href: FONT_CSS },
     ],
-  }),
+  };
+  },
   notFoundComponent: NotFound,
   component: RootDocument,
 });

@@ -83,6 +83,70 @@ function PricingPage() {
           </Link>
           .
         </p>
+        <div className="mb-8 max-w-3xl space-y-4 text-[15px] leading-relaxed text-ink-soft">
+          <h2 className="font-display text-2xl font-semibold tracking-tight text-ink">What you get on each plan</h2>
+          <p>
+            Every plan is the same listing desk: canonical NAP, publisher coverage, duplicate radar, and
+            hours / category monitoring across Google, Apple, Bing, MapQuest, and the directory network.
+            Starter is listed at <strong className="font-semibold text-ink">$49/month</strong> for one
+            location. Growth is listed at <strong className="font-semibold text-ink">$149/month</strong> for
+            up to 25 locations, with shared workspace seats for marketing and SEO. Enterprise is custom for
+            franchises, agencies, and national footprints that need SSO, role controls, and bulk correction
+            workflows. Billing is not live yet — start a free trial for Starter product access, or book a
+            call for Growth and Enterprise.
+          </p>
+          <h2 className="font-display text-2xl font-semibold tracking-tight text-ink">Who pricing is for</h2>
+          <p>
+            Choose Starter when you want the product on a single storefront before you scale. Choose Growth
+            when you already run a multi-location set and need one health score instead of tab-hopping
+            publisher logins. Choose Enterprise when an agency multi-account structure, franchise governance,
+            or unlimited locations is the real constraint — not the feature checklist.
+          </p>
+          <h2 className="font-display text-2xl font-semibold tracking-tight text-ink">Limits and ceilings</h2>
+          <p>
+            Location count is the main ceiling: one on Starter, up to 25 on Growth, unlimited on Enterprise.
+            A location is a unique storefront NAP (or one service-area coverage region you publish). BLM is
+            listing management software, not a review inbox or full local SEO suite. There is no billed free
+            plan; the free trial is how you evaluate Starter before charging begins. Listed rates above are
+            the public prices we intend to charge — they are not a discounted promo and they are not
+            invented rankings against other vendors.
+          </p>
+          <h2 className="font-display text-2xl font-semibold tracking-tight text-ink">How onboarding and billing start</h2>
+          <p>
+            Starter: open a free trial, create a workspace, import or add your location, approve canonical
+            NAP, and run the first audit. Growth and Enterprise: book a call so we can confirm location
+            count, agency vs brand seating, and whether you need SSO or bulk corrections before you import.
+            Prefer to talk first? Use{" "}
+            <Link to="/book" className="font-medium text-ink underline-offset-2 hover:underline">
+              book a call
+            </Link>
+            . Want the workflow before you pick a plan? Read{" "}
+            <Link to="/how-it-works" className="font-medium text-ink underline-offset-2 hover:underline">
+              how it works
+            </Link>
+            .
+          </p>
+          <h2 className="font-display text-2xl font-semibold tracking-tight text-ink">
+            What the listed price covers — and what it does not
+          </h2>
+          <p>
+            The listed Starter and Growth prices are SaaS access to the listing desk when billing goes live:
+            locations in a workspace, NAP / coverage / duplicate / hours scores, and the shared operating
+            view marketing and SEO already expect. They do not include paid directory submission fees a
+            publisher may charge on its own, agency labor to close alerts, or custom data engineering.
+            Enterprise adds governance (SSO, roles, bulk corrections, multi-account structure) when the
+            footprint or agency model needs it — that is scoped on a call, not a self-serve toggle.
+          </p>
+          <p>
+            If you are modeling total cost of ownership, separate three buckets: the BLM plan, the hours your
+            team spends approving canonical NAP and closing duplicates, and any publisher-side fees outside
+            this product. The planning article linked above walks DIY hours versus agency retainers without
+            inventing traffic or ranking claims. Pick a scale below to highlight the plan that matches your
+            storefront count, then start a trial or book a call. FAQs under the plans repeat the same
+            facts in short form: how to start, what counts as a location, and that there is no billed free
+            plan — only a free trial into Starter product access.
+          </p>
+        </div>
         <div className="mb-8 flex flex-wrap items-center gap-2">
           <p className="mr-2 text-sm font-semibold text-ink-soft">How many storefronts?</p>
           {SCALES.map((s) => (

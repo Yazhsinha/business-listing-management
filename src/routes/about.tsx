@@ -331,6 +331,18 @@ function BuiltBy() {
                 The brief is simple: build business listing management software operators actually open on a
                 Monday — not another overlay that rents someone else’s directory graph.
               </p>
+              <p className="text-[17px] leading-relaxed text-ink-soft">
+                Profiles:{" "}
+                <a
+                  href="https://www.linkedin.com/in/asmit-c/"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="font-medium text-ink underline-offset-2 hover:underline"
+                >
+                  LinkedIn
+                </a>
+                .
+              </p>
               <div className="mt-2 flex flex-wrap gap-3">
                 <Button asChild>
                   <Link to="/trial">Start free trial</Link>

@@ -109,21 +109,91 @@ function ProductPage() {
         lede="BLM is business listing management software for teams who cannot afford a different address on Google, Apple, Bing, and the directory network."
       />
       <section className="page-wrap py-10 sm:py-16">
-        <p className="mb-8 max-w-3xl text-sm leading-relaxed text-ink-soft">
-          Business listing management here means one governed NAP, duplicate radar, and publisher coverage you can inspect. Start on the{" "}
-          <Link to="/" className="font-medium text-ink underline-offset-2 hover:underline">
-            BLM homepage
-          </Link>{" "}
-          or read{" "}
-          <Link
-            to="/blog/$slug"
-            params={{ slug: "what-is-business-listing-management" }}
-            className="font-medium text-ink underline-offset-2 hover:underline"
-          >
-            what is business listing management
-          </Link>{" "}
-          for the category definition.
-        </p>
+        <div className="mb-10 max-w-3xl space-y-4 text-[15px] leading-relaxed text-ink-soft">
+          <p>
+            Business listing management here means one governed NAP, duplicate radar, and publisher coverage
+            you can inspect. Start on the{" "}
+            <Link to="/" className="font-medium text-ink underline-offset-2 hover:underline">
+              BLM homepage
+            </Link>{" "}
+            or read{" "}
+            <Link
+              to="/blog/$slug"
+              params={{ slug: "what-is-business-listing-management" }}
+              className="font-medium text-ink underline-offset-2 hover:underline"
+            >
+              what is business listing management
+            </Link>{" "}
+            for the category definition. The sections below explain what the product ships, who it is for,
+            honest limits, and how onboarding usually starts.
+          </p>
+          <h2 className="font-display text-2xl font-semibold tracking-tight text-ink">What you get</h2>
+          <p>
+            BLM keeps a canonical name, address, and phone per location, then diffs Google, Apple, Bing,
+            MapQuest, and the directory network against that string — suite lines, tracking numbers, and DBA
+            versus legal name included. Duplicate radar flags near-matches on phone, place id, and name with
+            a suggested surviving listing so reviews and photos are not orphaned. Hours and categories are
+            scored as health: holiday windows that never left Google, or a primary category that says
+            Restaurant on one publisher and Ramen Shop on another, both move the desk. Marketing, franchise
+            ops, and agencies share the same location list; early access includes digest emails when a
+            storefront drifts.
+          </p>
+          <h2 className="font-display text-2xl font-semibold tracking-tight text-ink">Who it is for</h2>
+          <p>
+            Multi-location brands that cannot afford a different address on maps. Franchises that lock brand
+            NAP while franchisees keep local hours. Agencies that need one workspace per client brand instead
+            of screenshot theatre. Local SEO teams that want citations, duplicates, and category hygiene on
+            the same score they show a CMO. If you only edit one Google Business Profile, you may not need
+            this desk yet.
+          </p>
+          <h2 className="font-display text-2xl font-semibold tracking-tight text-ink">Limits</h2>
+          <p>
+            BLM is listing management software — not a review response inbox, rank tracker, or paid-media
+            suite. Compare pages explain fits and weaknesses against other tools; we do not publish
+            independent “best listings software” listicles as if BLM were a neutral blog. Listed pricing is
+            Starter at $49/month (one location) and Growth at $149/month (up to 25 locations), with Enterprise
+            custom. Billing is not live yet. Start a{" "}
+            <Link to="/trial" className="font-medium text-ink underline-offset-2 hover:underline">
+              free trial
+            </Link>{" "}
+            or{" "}
+            <Link to="/book" className="font-medium text-ink underline-offset-2 hover:underline">
+              book a call
+            </Link>
+            .
+          </p>
+          <h2 className="font-display text-2xl font-semibold tracking-tight text-ink">How onboarding works</h2>
+          <p>
+            Create a workspace, import locations, approve canonical NAP, run the first publisher audit, then
+            work duplicates and hours. The interactive desk below is a product sample of how scores and
+            publisher rows move together. Full step-by-step lives on{" "}
+            <Link to="/how-it-works" className="font-medium text-ink underline-offset-2 hover:underline">
+              how it works
+            </Link>
+            ; plan ceilings live on{" "}
+            <Link to="/pricing" className="font-medium text-ink underline-offset-2 hover:underline">
+              pricing
+            </Link>
+            .
+          </p>
+          <h2 className="font-display text-2xl font-semibold tracking-tight text-ink">
+            How the desk is organized
+          </h2>
+          <p>
+            Each location carries four scores operators actually use: NAP consistency, publisher coverage,
+            duplicate risk, and hours / category hygiene. Clicking a score filters the publisher list so you
+            see Google, Apple, Bing, and MapQuest in the same frame — not four separate admin UIs. Feature
+            cards below cover canonical NAP diffs, duplicate radar, hours and categories, and the shared
+            workspace model. None of that is a ranked “best software” list; it is the product surface BLM
+            ships for teams who already decided they need listing management.
+          </p>
+          <p>
+            Early access is intentionally narrow: govern the footprint first, then expand coverage and
+            automation. If you need a compare page for a specific incumbent, use the Compare hub. If you need
+            definitions for citations or NAP, use the glossary and blog. This page stays on what the software
+            does when you open it on a Monday.
+          </p>
+        </div>
         <ProductDesk />
         <div className="mt-10 grid gap-4 lg:grid-cols-2">
           {FEATURES.map((item, i) => (

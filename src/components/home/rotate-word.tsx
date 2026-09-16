@@ -2,7 +2,8 @@ import { useEffect, useState } from "react";
 import { cn } from "@/lib/utils";
 
 const WORDS = ["accurate", "found", "synced", "listed", "trusted"] as const;
-const LONGEST = "accurate";
+/** ch-width for layout only — do not render a second copy of the word in the DOM. */
+const LONGEST_CH = Math.max(...WORDS.map((w) => w.length));
 
 export function RotateWord() {
   const [index, setIndex] = useState(0);
@@ -34,7 +35,10 @@ export function RotateWord() {
   // Width via ch only — do not put a second invisible copy of the word in the DOM
   // (crawlers concatenated "accurateaccurate" from the spacer + visible span).
   return (
-    <span className="inline-block text-center italic text-brand" style={{ minWidth: `${LONGEST.length}ch` }}>
+    <span
+      className="inline-block text-center italic text-brand"
+      style={{ minWidth: `${LONGEST_CH}ch` }}
+    >
       <span key={word} className={cn(motion && "animate-word-in")}>
         {word}
       </span>
