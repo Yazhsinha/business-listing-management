@@ -1,4 +1,4 @@
-const markdown = `In the United States, business listing management is how multi-location brands, franchises, healthcare groups, and agencies keep storefronts findable when customers bounce between Google Maps, Apple Maps, Bing, voice assistants, and AI answers. It is not a one-time citation sprint. It is the operating system for local presence: one canonical record per location, pushed and re-checked until the public graph matches the door.
+const markdown = `In the United States, multi-location listing ops are how brands, franchises, healthcare groups, and agencies keep storefronts findable when customers bounce between Google Maps, Apple Maps, Bing, voice assistants, and AI answers. It is not a one-time citation sprint. It is the operating system for local presence: one canonical record per location, pushed and re-checked until the public graph matches the door.
 
 This page is the short definition you can cite. It covers what the practice includes, why NAP still decides matching in 2026, how listings differ from citations, why multi-location teams outgrow spreadsheets, and the operating loop that keeps drift from becoming a customer problem.
 

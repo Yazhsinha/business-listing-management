@@ -1,4 +1,4 @@
-const markdown = `In 2026, business listing management cost is software plus labor: Starter at $49/month for one location after a 7-day trial, Growth at $149/month for up to 25 locations, Enterprise custom, plus the hidden cost of NAP drift when nobody watches Apple, Bing, and the directory network.
+const markdown = `Starter is $49/month for one location after a 7-day trial; Growth is $149/month for up to 25 locations; Enterprise is custom. Software cost is only half the story: NAP drift when nobody watches Apple, Bing, and the directory network is the hidden labor line.
 
 Listed rates also live on the [pricing](/pricing) page. Start on the [BLM homepage](/) for the product view, read [what is business listing management?](https://businesslistingmanagement.com/blog/what-is-business-listing-management) for the category definition, and use [compare listing software](/compare) when you are shortlisting vendors.
 
