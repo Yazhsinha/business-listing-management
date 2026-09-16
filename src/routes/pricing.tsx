@@ -133,6 +133,32 @@ function PricingPage() {
             </Reveal>
           ))}
         </div>
+        <div className="mt-12 max-w-3xl space-y-5 text-base leading-relaxed text-ink-soft">
+          <h2 className="font-display text-2xl font-semibold text-ink">How to read these prices</h2>
+          <p>
+            Listed rates are Starter at $49/month and Growth at $149/month for up to 25 locations when billing goes
+            live. Enterprise is custom for larger footprints, SSO, and procurement needs. Billing is not live yet: you
+            can create a workspace without a card so the team can evaluate the desk on real locations before anyone
+            debates a PO.
+          </p>
+          <p>
+            A location is one unique storefront NAP — one canonical name, address, and phone. Service-area businesses
+            count as one location per coverage area you publish. If you are comparing to sales-led enterprise platforms,
+            expect custom quotes there and a longer implementation. If you are comparing to citation-only tools, expect
+            BLM to emphasize ongoing publisher consistency after the first audit, not a one-time submission pack.
+          </p>
+          <h2 className="font-display text-2xl font-semibold text-ink">What is included — and what is not</h2>
+          <p>
+            Plans are meant to cover the listing desk: import, health scores, duplicate and hours risk, and digests.
+            They are not a managed local SEO retainer, not paid media, and not a guarantee that every niche directory
+            will accept an automated update. Publisher coverage and packaging can change; the public pricing page is the
+            source for list prices, and a demo is the place to pressure-test your footprint before you commit.
+          </p>
+          <p>
+            Start with the storefront count toggle above, open a workspace, and escalate to a walkthrough only when the
+            first health pass shows real publisher exceptions your team cannot clear in a spreadsheet.
+          </p>
+        </div>
         <dl className="mt-12 grid gap-3">
           {pageFaqs.map((f) => (
             <FaqRow key={f.q} q={f.q} a={f.a} />

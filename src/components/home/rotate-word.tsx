@@ -31,12 +31,11 @@ export function RotateWord() {
 
   const word = WORDS[index];
 
+  // Width via ch only — do not put a second invisible copy of the word in the DOM
+  // (crawlers concatenated "accurateaccurate" from the spacer + visible span).
   return (
-    <span className="inline-grid text-center italic text-brand" style={{ minWidth: `${LONGEST.length}ch` }}>
-      <span className="invisible col-start-1 row-start-1 select-none" aria-hidden="true">
-        {LONGEST}
-      </span>
-      <span key={word} className={cn("col-start-1 row-start-1", motion && "animate-word-in")}>
+    <span className="inline-block text-center italic text-brand" style={{ minWidth: `${LONGEST.length}ch` }}>
+      <span key={word} className={cn(motion && "animate-word-in")}>
         {word}
       </span>
     </span>

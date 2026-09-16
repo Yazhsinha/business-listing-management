@@ -156,6 +156,37 @@ function ProductPage() {
             </Reveal>
           ))}
         </div>
+        <div className="mx-auto mt-12 max-w-3xl space-y-5 text-base leading-relaxed text-ink-soft">
+          <h2 className="font-display text-2xl font-semibold text-ink">What the product actually does</h2>
+          <p>
+            Business listing management software is not a rankings dashboard. It is the system that keeps every public
+            location record aligned with the address, phone, hours, and categories your customers should trust. BLM
+            centers that job: canonical NAP per location, publisher coverage checks, duplicate radar, and hours or
+            category drift that changes a health score before a customer hits the wrong pin.
+          </p>
+          <p>
+            The desk view above is the operating surface. Scores are not vanity metrics — they point at a concrete
+            publisher state (LLC suffix leftover on Bing, Sunday hours still open on Google, a near-match cafe name on
+            Yelp). Marketing, franchise ops, and agencies share one location list so the person who can fix a field is
+            the person who sees the alert. Digest email is for drift after the first cleanup, not a replacement for
+            human approval on NAP.
+          </p>
+          <h2 className="font-display text-2xl font-semibold text-ink">Who should buy it — and who should not</h2>
+          <p>
+            Buy BLM when the hard part is keeping dozens or hundreds of storefronts consistent across Google, Apple,
+            Bing, and directories with a small ops team. Skip it if you need a full enterprise knowledge graph, custom
+            publisher contracts in dozens of countries, or a managed agency to file every correction for you. Compare
+            pages on this site state those tradeoffs plainly; independent software shortlists belong on
+            locallistingsmanagement.co, not here.
+          </p>
+          <h2 className="font-display text-2xl font-semibold text-ink">Onboarding without theater</h2>
+          <p>
+            Create a workspace, import locations, and review the first publisher diffs. Assign who can approve NAP
+            changes. Turn on digests once the backlog is owned. Starter and Growth rates are listed on pricing when
+            billing goes live; Enterprise is a conversation for larger footprints and SSO. We do not invent win-rate
+            charts or claim BLM replaces every local SEO tool in your stack.
+          </p>
+        </div>
         <div className="cta-band mt-12 rounded-3xl border border-line px-6 py-10 sm:px-10">
           <h2 className="font-display text-3xl font-semibold">See it on your own locations</h2>
           <p className="mt-2 max-w-xl text-ink-soft">Start a free trial. Book a call if you already run a national footprint.</p>
