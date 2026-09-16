@@ -71,6 +71,10 @@ Business listing management at graph scale does not mean assigning a person to "
 
 [Start a free trial](/trial) to run the listing auditor against a real location. Cost context sits in [business listing management cost in 2026](https://businesslistingmanagement.com/blog/business-listing-management-pricing-2026): DIY time, retainers, Starter at $49/month after trial, Growth at $149/month, then Enterprise. The weekly meeting should look at the graph. If the only slide is a GBP insights screenshot, you are reporting a channel, not managing listings.
 
+## How do you prove non-Google publishers were updated?
+
+Use the [QA evidence standard for listing changes](/blog/listing-change-qa-evidence): request, submit, then timed live checks on Apple, Bing, and priority directories—not a Google-only screenshot.
+
 ## FAQ
 
 ### Does updating Google eventually update Apple and Bing?

@@ -29,7 +29,12 @@ const HUBS = [
 
 function ResourcesPage() {
   const data = Route.useLoaderData();
-  const posts = (data.articles.length ? data.articles : BLOG_POSTS).map(toCard);
+  const cms = data.articles.map(toCard);
+  const have = new Set(cms.map((c) => c.slug));
+  const staticExtra = BLOG_POSTS.filter((post) => !have.has(post.slug)).map(toCard);
+  const posts = (cms.length ? [...cms, ...staticExtra] : BLOG_POSTS.map(toCard)).sort((a, b) =>
+    b.date.localeCompare(a.date),
+  );
   const featured = posts[0];
   const rest = posts.slice(1);
 

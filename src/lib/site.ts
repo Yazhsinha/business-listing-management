@@ -276,6 +276,11 @@ export const FAQ = [
     a: "Business listing management is the ongoing process of creating, verifying, and synchronizing a company’s name, address, phone (NAP), hours, and categories across search engines, maps, and online directories so every location stays accurate. BLM does that from one workspace.",
   },
   {
+    q: "Who should own business listing management inside the company?",
+    a: "Name one Accountable owner for canonical NAP and categories—usually brand or corporate marketing. The listing desk or agency is Responsible for execution. Stores own hours and temporary closures only when the playbook says so.",
+  },
+
+  {
     q: "What is BLM?",
     a: `BLM (Business Listing Management) is software for multi-location brands, franchises, agencies, and local SEO teams. It unifies NAP, finds duplicates, scores directory coverage, and keeps ${COVERAGE} in lockstep.`,
   },

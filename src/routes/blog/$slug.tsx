@@ -9,13 +9,11 @@ import { stripDuplicateMarkdownOpener } from "@/lib/content/strip-duplicate-open
 import {
   articleJsonLd,
   breadcrumbJsonLd,
-  definedTermJsonLd,
   defaultShareImage,
   faqJsonLd,
   pageHead,
   publicOrigin,
 } from "@/lib/seo";
-import { SITE } from "@/lib/site";
 import { resolveAuthor } from "@/lib/authors";
 import { AuthorBlock } from "@/components/blog/author-block";
 
@@ -93,16 +91,6 @@ function BlogPostPage() {
           },
         ])}
       />
-      {article.slug === "what-is-business-listing-management" ? (
-        <JsonLd
-          data={definedTermJsonLd({
-            name: "Business listing management",
-            description:
-              "Business listing management is the ongoing process of creating, verifying, and synchronizing a company's name, address, phone (NAP), hours, and categories across search engines, maps, and online directories so every location stays accurate.",
-            url: `${SITE.domain}/blog/what-is-business-listing-management`,
-          })}
-        />
-      ) : null}
       <article className="mx-auto max-w-3xl px-4 py-12 sm:px-6">
         <p className="text-xs font-semibold uppercase tracking-[0.16em] text-muted">{article.tags[0]}</p>
         <h1 className="mt-3 font-display text-4xl font-semibold tracking-tight text-ink sm:text-[2.6rem]">

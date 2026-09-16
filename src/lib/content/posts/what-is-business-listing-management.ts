@@ -97,6 +97,10 @@ A store closes on Sunday for a private event and only Google hears about it. A r
 
 Give the work a named owner. Brand owns canonical NAP and categories; stores own hours; an agency executes against an SLA. Shared logins with no system of record are how Google gets updated and Apple does not. The [best business listing management software in 2026](https://businesslistingmanagement.com/blog/best-business-listing-management-software-2026) is the stack that catches that before a customer does.
 
+## Where should ownership and change control live?
+
+Give listing work a RACI before you scale publisher access. Start with [who owns listing management?](/blog/listing-management-raci), keep edits in a [source-of-truth workflow](/blog/listing-source-of-truth-workflow), and require [QA evidence for listing changes](/blog/listing-change-qa-evidence) so "submitted" is never mistaken for live. Lifecycle spikes (opens, moves, closes) get their own [open / move / close playbook](/blog/location-open-move-close-playbook).
+
 ## FAQ
 
 ### Is business listing management the same as local SEO?

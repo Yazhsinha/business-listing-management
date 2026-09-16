@@ -1,7 +1,7 @@
 import { useState, createContext, useContext } from "react";
 import { Link } from "@tanstack/react-router";
 import { LogoMark } from "@/components/logo";
-import { ArrowRight, Check, ChevronDown } from "lucide-react";
+import { ArrowRight, Check } from "lucide-react";
 import { LockIn } from "@/components/home/lock-in";
 import { ProductProof } from "@/components/home/product-proof";
 import { Reveal } from "@/components/home/reveal";
@@ -41,7 +41,7 @@ export function HomePage({ copy }: { copy?: HomeCopy }) {
           name: "Business listing management",
           description:
             "Business listing management is the ongoing process of creating, verifying, and synchronizing a company's name, address, phone (NAP), hours, and categories across search engines, maps, and online directories so every location stays accurate.",
-          url: `${SITE.domain}/blog/what-is-business-listing-management`,
+          url: `${SITE.domain}/`,
         })}
       />
       <Hero />
@@ -165,8 +165,8 @@ function QuickAnswer() {
           <h2 id="quick-answer-title" className="mt-2 font-display text-2xl font-semibold text-ink sm:text-3xl">
             What is business listing management?
           </h2>
-          <p className="mt-4 max-w-3xl text-[17px] leading-relaxed text-ink-soft">
-            Business listing management is the ongoing process of creating, verifying, and synchronizing a company’s name, address, phone (NAP), hours, and categories across search engines, maps, and online directories so every location stays accurate. BLM does that for {COVERAGE} from one workspace.
+          <p className="mt-4 max-w-3xl text-[17px] leading-relaxed text-ink-soft" data-direct-answer="business-listing-management">
+            Business listing management is the ongoing work of creating, verifying, and synchronizing a company’s name, address, phone (NAP), hours, and categories across search engines, maps, and directories so every location stays accurate. BLM runs that loop for {COVERAGE} from one workspace.
           </p>
           <ul className="mt-6 grid gap-3 sm:grid-cols-2">
             {[
@@ -186,26 +186,59 @@ function QuickAnswer() {
             ))}
           </ul>
           <div className="mt-5 flex flex-wrap gap-x-4 gap-y-2 text-sm font-semibold">
-            <Link
-              to="/blog/$slug"
-              params={{ slug: "what-is-business-listing-management" }}
-              className="inline-flex cursor-pointer items-center gap-1 text-brand underline-offset-2 hover:text-brand-hover hover:underline focus-visible:underline"
-            >
-              Full definition <ArrowRight className="size-4" />
-            </Link>
-            <Link to="/compare" className="inline-flex cursor-pointer items-center gap-1 text-ink-soft underline-offset-2 transition-colors hover:text-ink hover:underline focus-visible:text-ink focus-visible:underline">
-              Compare listing software
+            <Link to="/compare" className="inline-flex cursor-pointer items-center gap-1 text-brand underline-offset-2 hover:text-brand-hover hover:underline focus-visible:underline">
+              Compare listing software <ArrowRight className="size-4" />
             </Link>
             <Link to="/pricing" className="inline-flex cursor-pointer items-center gap-1 text-ink-soft underline-offset-2 transition-colors hover:text-ink hover:underline focus-visible:text-ink focus-visible:underline">
-              Business listing management cost
+              Listed pricing
             </Link>
             <Link
               to="/blog/$slug"
               params={{ slug: "best-business-listing-management-software-2026" }}
               className="inline-flex cursor-pointer items-center gap-1 text-ink-soft underline-offset-2 transition-colors hover:text-ink hover:underline focus-visible:text-ink focus-visible:underline"
             >
-              Best software guide
+              Software evaluation guide
             </Link>
+          </div>
+          <div className="mt-8 rounded-2xl border border-line bg-paper px-5 py-5 sm:px-6" aria-labelledby="cluster-reading-title">
+            <p id="cluster-reading-title" className="text-xs font-semibold uppercase tracking-[0.16em] text-brand">
+              Cluster reading
+            </p>
+            <p className="mt-2 text-sm leading-relaxed text-ink-soft">
+              This homepage owns the commercial definition of business listing management. Use these operator guides for governance, migration, QA, and lifecycle work without creating a second head-term page.
+            </p>
+            <ul className="mt-4 grid gap-2 text-sm font-semibold sm:grid-cols-2">
+              <li>
+                <Link to="/blog/$slug" params={{ slug: "listing-management-raci" }} className="text-ink underline-offset-2 hover:text-brand hover:underline">
+                  Who owns listing management? (RACI)
+                </Link>
+              </li>
+              <li>
+                <Link to="/blog/$slug" params={{ slug: "listing-vendor-migration-checklist" }} className="text-ink underline-offset-2 hover:text-brand hover:underline">
+                  Vendor switch checklist
+                </Link>
+              </li>
+              <li>
+                <Link to="/blog/$slug" params={{ slug: "listing-change-qa-evidence" }} className="text-ink underline-offset-2 hover:text-brand hover:underline">
+                  QA evidence standard
+                </Link>
+              </li>
+              <li>
+                <Link to="/blog/$slug" params={{ slug: "location-open-move-close-playbook" }} className="text-ink underline-offset-2 hover:text-brand hover:underline">
+                  Open / move / close playbook
+                </Link>
+              </li>
+              <li>
+                <Link to="/blog/$slug" params={{ slug: "listing-source-of-truth-workflow" }} className="text-ink underline-offset-2 hover:text-brand hover:underline">
+                  Source-of-truth change control
+                </Link>
+              </li>
+              <li>
+                <Link to="/blog/$slug" params={{ slug: "what-is-business-listing-management" }} className="text-ink underline-offset-2 hover:text-brand hover:underline">
+                  Multi-location listing ops
+                </Link>
+              </li>
+            </ul>
           </div>
           <p className="mt-6 max-w-3xl text-xs leading-relaxed text-muted">
             Sources checked 2026-09-06:{" "}
@@ -351,7 +384,7 @@ function FaqSection() {
         <Reveal>
           <p className="text-xs font-semibold uppercase tracking-[0.16em] text-brand">FAQ</p>
           <h2 id="faq-title" className="mt-3 font-display text-3xl font-semibold tracking-tight sm:text-4xl">
-            Common questions
+            Frequently asked questions
           </h2>
           <p className="mt-4 text-ink-soft">Citation-ready answers for buyers, analysts, and models.</p>
         </Reveal>
@@ -407,23 +440,10 @@ function AudienceChip({
 }
 
 function FaqItem({ q, a }: { q: string; a: string }) {
-  const [open, setOpen] = useState(false);
   return (
-    <div className="border-b border-line">
-      <button
-        type="button"
-        className="flex min-h-14 w-full items-center justify-between gap-4 py-5 text-left"
-        aria-expanded={open}
-        onClick={() => setOpen((v) => !v)}
-      >
-        <span className="font-semibold text-ink">{q}</span>
-        <ChevronDown className={cn("size-5 shrink-0 text-muted transition-transform duration-200", open && "rotate-180")} />
-      </button>
-      <div className={cn("grid transition-[grid-template-rows] duration-300 ease-[var(--ease-out-soft)]", open ? "grid-rows-[1fr]" : "grid-rows-[0fr]")}>
-        <p className="overflow-hidden text-sm leading-relaxed text-ink-soft">
-          <span className="block pb-5">{a}</span>
-        </p>
-      </div>
+    <div className="border-b border-line py-5">
+      <h3 className="font-semibold text-ink">{q}</h3>
+      <p className="mt-2 text-sm leading-relaxed text-ink-soft">{a}</p>
     </div>
   );
 }
@@ -438,11 +458,14 @@ function Resources() {
       if (byDate) return byDate;
       return (b.updated_at || "").localeCompare(a.updated_at || "");
     });
-  // CMS published list is authoritative. Do not pad with static seeds after a slug rename.
-  const cards =
-    cms.length > 0
-      ? cms.slice(0, 6).map(toCard)
-      : BLOG_POSTS.slice(0, 6).map(toCard);
+  // Prefer CMS rows, then fill with static library posts missing from CMS (new cluster articles).
+  const cmsCards = cms.map(toCard);
+  const have = new Set(cmsCards.map((c) => c.slug));
+  const staticExtra = BLOG_POSTS.filter((p) => !have.has(p.slug)).map(toCard);
+  const cards = [...cmsCards, ...staticExtra]
+    .sort((a, b) => b.date.localeCompare(a.date))
+    .slice(0, 6);
+
 
   return (
     <section className="page-wrap py-16 sm:py-24" aria-labelledby="resources-title">

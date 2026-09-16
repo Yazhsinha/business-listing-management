@@ -86,6 +86,10 @@ Keep the POC ugly and short.
 
 BLM's path is intentionally unromantic: [start a free trial](/trial), run the auditor, then Growth or Enterprise when the score is part of the week. Use the same standard on every vendor.
 
+## What operating docs should exist before you buy?
+
+Software will not invent governance. Draft a [listing RACI](/blog/listing-management-raci) and a [source-of-truth workflow](/blog/listing-source-of-truth-workflow) first. If you are replacing a vendor, keep the [migration checklist](/blog/listing-vendor-migration-checklist) in the same packet as the scorecard.
+
 ## FAQ
 
 ### Do we still need listing software if we only care about Google?

@@ -81,6 +81,10 @@ BLM's path is meant to be unromantic: [start a free trial](/trial) on a prospect
 
 The product you sell the client is not a tool logo. It is onboarding, SLA, report, and a graph that stays true. Software is how you deliver that twice a month without burning the team. The [local listings management guide](https://locallistingsmanagement.co/local-listings-management-guide) is a useful shared language document when the client still thinks "listings" means "we paid for citations once."
 
+## How should agencies hand off ownership and migrations?
+
+Put the brand on a [listing RACI](/blog/listing-management-raci) before you take seats. When a client switches tools mid-retainer, run the [vendor switch checklist](/blog/listing-vendor-migration-checklist) so you do not inherit double-writes. Close every material edit with the [QA evidence standard](/blog/listing-change-qa-evidence).
+
 ## FAQ
 
 ### Should listing management be a line item or bundled into local SEO?

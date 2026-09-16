@@ -11,6 +11,26 @@ export function Markdown({ source }: { source: string }) {
   );
 }
 
+function isTableBlock(text: string) {
+  const lines = text.split("\n").map((l) => l.trim()).filter(Boolean);
+  if (lines.length < 2) return false;
+  if (!lines[0].includes("|")) return false;
+  return /^\|?\s*:?-{3,}/.test(lines[1].replace(/\|/g, "|")) || lines[1].includes("---");
+}
+
+function parseTable(text: string) {
+  const lines = text.split("\n").map((l) => l.trim()).filter(Boolean);
+  const split = (line: string) =>
+    line
+      .replace(/^\|/, "")
+      .replace(/\|$/, "")
+      .split("|")
+      .map((c) => c.trim());
+  const header = split(lines[0]);
+  const body = lines.slice(2).map(split).filter((r) => r.some(Boolean));
+  return { header, body };
+}
+
 function Block({ text }: { text: string }) {
   if (text.startsWith("## ")) {
     return (
@@ -24,14 +44,53 @@ function Block({ text }: { text: string }) {
       <h3 className="pt-2 font-display text-xl font-semibold text-ink">{inline(text.slice(4))}</h3>
     );
   }
-  if (text.startsWith("- ")) {
-    const items = text.split(/\n/).filter((l) => l.startsWith("- "));
+  if (isTableBlock(text)) {
+    const { header, body } = parseTable(text);
+    return (
+      <div className="overflow-x-auto rounded-2xl border border-line">
+        <table className="min-w-full border-collapse text-left text-sm">
+          <thead className="bg-cream">
+            <tr>
+              {header.map((h) => (
+                <th key={h} className="border-b border-line px-3 py-2 font-semibold text-ink">
+                  {inline(h)}
+                </th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            {body.map((row, ri) => (
+              <tr key={ri} className="odd:bg-paper even:bg-cream/40">
+                {row.map((cell, ci) => (
+                  <td key={ci} className="border-b border-line px-3 py-2 align-top">
+                    {inline(cell)}
+                  </td>
+                ))}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    );
+  }
+  if (text.startsWith("- ") || text.startsWith("* ")) {
+    const items = text.split("\n").filter((l) => /^[-*]\s+/.test(l));
     return (
       <ul className="list-disc space-y-1 pl-5">
         {items.map((item) => (
-          <li key={item}>{inline(item.slice(2))}</li>
+          <li key={item}>{inline(item.replace(/^[-*]\s+/, ""))}</li>
         ))}
       </ul>
+    );
+  }
+  if (/^\d+[.)]\s+/.test(text)) {
+    const items = text.split("\n").filter((l) => /^\d+[.)]\s+/.test(l));
+    return (
+      <ol className="list-decimal space-y-1 pl-5">
+        {items.map((item) => (
+          <li key={item}>{inline(item.replace(/^\d+[.)]\s+/, ""))}</li>
+        ))}
+      </ol>
     );
   }
   return <p>{inline(text)}</p>;

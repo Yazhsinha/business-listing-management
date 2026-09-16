@@ -20,13 +20,11 @@ export const Route = createFileRoute("/blog/")({
 
 function BlogIndex() {
   const data = Route.useLoaderData();
-  // When CMS has published rows, they are the listing source of truth.
-  // Merging static BLOG_POSTS kept old slugs live after desk renames.
-  const posts = (
-    data.articles.length
-      ? data.articles.filter((a) => a.status === "published").map(toCard)
-      : BLOG_POSTS.map(toCard)
-  ).sort((a, b) => b.date.localeCompare(a.date));
+  // CMS rows win per slug; static library fills gaps (new cluster posts before desk seed).
+  const cmsPosts = data.articles.filter((a) => a.status === "published").map(toCard);
+  const have = new Set(cmsPosts.map((p) => p.slug));
+  const staticExtra = BLOG_POSTS.filter((p) => !have.has(p.slug)).map(toCard);
+  const posts = [...cmsPosts, ...staticExtra].sort((a, b) => b.date.localeCompare(a.date));
 
   return (
     <SiteShell>
@@ -42,19 +40,11 @@ function BlogIndex() {
         lede="Business listing management guides without recycled tool roundups. Each piece starts with a definition you can cite."
       >
         <p className="mb-8 max-w-3xl text-sm leading-relaxed text-ink-soft">
-          Start with{" "}
-          <Link
-            to="/blog/$slug"
-            params={{ slug: "what-is-business-listing-management" }}
-            className="font-medium text-ink underline-offset-2 hover:underline"
-          >
-            what is business listing management
-          </Link>{" "}
-          or return to the{" "}
+          The commercial definition of{" "}
           <Link to="/" className="font-medium text-ink underline-offset-2 hover:underline">
-            BLM homepage
-          </Link>
-          .
+            business listing management
+          </Link>{" "}
+          lives on the homepage. This blog covers operator guides—governance, QA, migration, lifecycle, NAP, and software evaluation—without stacking a second head-term owner.
         </p>
         <div className="grid gap-5">
           {posts.map((post) => (

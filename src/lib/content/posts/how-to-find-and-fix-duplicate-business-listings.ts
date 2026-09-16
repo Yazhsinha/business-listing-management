@@ -93,6 +93,10 @@ For footprint and budget, duplicates change the cleanup line more than the softw
 
 If you only remember four verbs: find, match, suppress, keep reviews. Everything else is publisher-specific paperwork.
 
+## How do lifecycle events create duplicates?
+
+Opens, moves, and closures are the usual fork moments. Use the [open / move / close playbook](/blog/location-open-move-close-playbook) before staff create a second Google profile, and keep survivor decisions with the Accountable owner on the [listing RACI](/blog/listing-management-raci).
+
 ## FAQ
 
 ### Should we just delete the listing with fewer reviews?

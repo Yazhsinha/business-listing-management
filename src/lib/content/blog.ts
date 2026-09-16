@@ -10,6 +10,67 @@ export type BlogPost = {
 };
 
 export const BLOG_POSTS: BlogPost[] = [
+
+  {
+    slug: "listing-management-raci",
+    title: "Who owns listing management? A RACI for multi-location teams",
+    description:
+      "Assign Accountable and Responsible owners for NAP, hours, categories, duplicates, and publisher access so franchisees and agencies cannot fork listings.",
+    date: "2026-09-16",
+    author: "Asmit Choudhary",
+    minutes: 10,
+    tags: ["Governance"],
+    excerpt:
+      "Listing drift starts when brand, stores, and agencies all edit without a RACI. Name one Accountable owner for canonical NAP and categories, keep desks Responsible for execution, and give franchisees hours-only rights.",
+  },
+  {
+    slug: "listing-vendor-migration-checklist",
+    title: "Vendor switch checklist for listing platforms",
+    description:
+      "Export claims, coverage, and open tickets before you cancel. Run a parallel read-only window, verify live profiles, then cut over without deleting survivors.",
+    date: "2026-09-16",
+    author: "Asmit Choudhary",
+    minutes: 11,
+    tags: ["Migration"],
+    excerpt:
+      "Switching listing vendors is a data and access project. Export the master and claim inventory, freeze double-writes, verify Google, Apple, and Bing live, then cancel the old tool only after a parallel run.",
+  },
+  {
+    slug: "listing-change-qa-evidence",
+    title: "QA evidence standard for listing changes",
+    description:
+      "Separate requested, submitted, and live. Attach timestamps, publisher IDs, and public checks so listing QA stops closing tickets on vendor success webhooks alone.",
+    date: "2026-09-16",
+    author: "Asmit Choudhary",
+    minutes: 10,
+    tags: ["QA"],
+    excerpt:
+      "A listing change is not done when a vendor says success. Require request, canonical row, submission log, and a timed live check—then queue mismatches with owners instead of inventing accuracy percentages.",
+  },
+  {
+    slug: "location-open-move-close-playbook",
+    title: "Open, move, and close location listing playbook",
+    description:
+      "Sequence opens, moves, and closures so Google, Apple, and Bing track the door—without creating duplicate pins or deleting review history first.",
+    date: "2026-09-16",
+    author: "Asmit Choudhary",
+    minutes: 11,
+    tags: ["Lifecycle"],
+    excerpt:
+      "Lifecycle events fork listings when staff create a second profile for a move or forget to mark a permanent close. Use a sequenced open/move/close playbook with survivor decisions and resurrection monitoring.",
+  },
+  {
+    slug: "listing-source-of-truth-workflow",
+    title: "Source-of-truth workflow for listing change control",
+    description:
+      "Pick one system of record for NAP and hours, then run request → approve → publish → verify so publisher consoles cannot silently become the master.",
+    date: "2026-09-16",
+    author: "Asmit Choudhary",
+    minutes: 9,
+    tags: ["Change control"],
+    excerpt:
+      "Change control decides which system wins before anyone edits Google. Keep a governed location master, serialize writes, ban personal logins, and close tickets only with live verification evidence.",
+  },
   {
     slug: "what-is-business-listing-management",
     title: "What multi-location listing ops actually cover",
