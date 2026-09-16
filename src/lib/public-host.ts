@@ -33,6 +33,13 @@ export function robotsTxtForHost(host: string | null | undefined): string {
   return [
     "User-agent: *",
     "Allow: /",
+    "Disallow: /app",
+    "Disallow: /login",
+    "Disallow: /signup",
+    "Disallow: /demo",
+    "Disallow: /trial",
+    "Disallow: /unsubscribe",
+    "Disallow: /admin",
     "",
     `Sitemap: ${PRODUCTION_ORIGIN}/sitemap.xml`,
     "",

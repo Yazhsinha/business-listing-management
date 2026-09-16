@@ -12,6 +12,7 @@ export const Route = createFileRoute("/demo")({
       description:
         "Book a business listing management call with BLM for franchise, agency, or multi-location teams. Redirects to /book.",
       path: "/demo",
+      robots: "noindex, follow",
     }),
   component: DemoRedirect,
 });

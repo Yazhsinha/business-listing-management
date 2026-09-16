@@ -15,6 +15,7 @@ export const Route = createFileRoute("/unsubscribe")({
       title: "Unsubscribe",
       description: "Unsubscribe from the BLM newsletter.",
       path: "/unsubscribe",
+      robots: "noindex, follow",
     }),
   component: UnsubscribePage,
 });

@@ -17,6 +17,7 @@ export const Route = createFileRoute("/app")({
       title: "Workspace",
       description: "BLM workspace: monitor locations, coverage, and listing health.",
       path: "/app",
+      robots: "noindex, follow",
     }),
   component: AppWorkspace,
 });

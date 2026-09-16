@@ -18,6 +18,7 @@ export const Route = createFileRoute("/signup")({
       description:
         "Create workspace is no longer the public path. Book a call with BLM or start a free trial.",
       path: "/signup",
+      robots: "noindex, follow",
     }),
   component: LegacySignupRedirect,
 });

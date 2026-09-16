@@ -34,6 +34,9 @@ test("vercel.app hosts are not indexable", () => {
   assert.match(robotsTxtForHost("blm-git-abc.vercel.app"), /Disallow: \//);
   assert.match(robotsTxtForHost("businesslistingmanagement.com"), /Allow: \//);
   assert.match(robotsTxtForHost("businesslistingmanagement.com"), /Sitemap:/);
+  assert.match(robotsTxtForHost("businesslistingmanagement.com"), /Disallow: \/app/);
+  assert.match(robotsTxtForHost("businesslistingmanagement.com"), /Disallow: \/login/);
+  assert.match(robotsTxtForHost("businesslistingmanagement.com"), /Disallow: \/admin/);
 });
 
 test("deploymentRobotsMeta only for preview/development", () => {
