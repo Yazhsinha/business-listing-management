@@ -14,6 +14,7 @@ import {
   pageHead,
   publicOrigin,
 } from "@/lib/seo";
+import { robotsForBlogSlug } from "@/lib/seo-noindex";
 import { resolveAuthor } from "@/lib/authors";
 import { AuthorBlock } from "@/components/blog/author-block";
 
@@ -49,6 +50,7 @@ export const Route = createFileRoute("/blog/$slug")({
       image,
       type: "article",
       imageAlt: article?.cover_alt?.trim() || article?.title || undefined,
+      robots: robotsForBlogSlug(article?.slug),
     });
   },
   component: BlogPostPage,

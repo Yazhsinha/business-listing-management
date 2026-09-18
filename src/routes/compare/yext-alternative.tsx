@@ -3,6 +3,7 @@ import { SiteShell } from "@/components/layout/site-shell";
 import { InnerPage } from "@/components/layout/inner-page";
 import { Button } from "@/components/ui/button";
 import { pageHead, articleJsonLd, breadcrumbJsonLd, faqJsonLd } from "@/lib/seo";
+import { NOINDEX_FOLLOW } from "@/lib/seo-noindex";
 import { JsonLd } from "@/components/json-ld";
 
 export const Route = createFileRoute("/compare/yext-alternative")({
@@ -12,6 +13,7 @@ export const Route = createFileRoute("/compare/yext-alternative")({
       description:
         "BLM as a Yext alternative when listing health is the job. Equal-weakness notes, dated Yext primary sources, and where Yext still wins for US teams.",
       path: "/compare/yext-alternative",
+      robots: NOINDEX_FOLLOW,
     }),
   component: YextPage,
 });
