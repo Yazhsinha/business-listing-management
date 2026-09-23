@@ -14,9 +14,9 @@ export const Route = createFileRoute("/blog/")({
   loader: () => loadPublicSite(),
   head: () =>
     pageHead({
-      title: "Business listing management blog",
+      title: "Business listing management blog: NAP and duplicates",
       description:
-        "Business listing management blog from BLM: guides covering NAP, duplicates, Google Business Profile, cost, and agency operations.",
+        "Business listing management blog from BLM: guides covering NAP, governance, QA, migration, duplicates, Google Business Profile, cost, and agency operations.",
       path: "/blog",
     }),
   component: BlogIndex,

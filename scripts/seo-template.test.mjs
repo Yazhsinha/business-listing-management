@@ -1,9 +1,11 @@
 import assert from "node:assert/strict";
+import { readFileSync } from "node:fs";
 import test from "node:test";
-import { BLOG_POSTS } from "../src/lib/content/blog.ts";
 import { visibleBlogHubCards } from "../src/lib/blog-hub.ts";
+import { BLOG_POSTS } from "../src/lib/content/blog.ts";
 import { robotsTxtForHost } from "../src/lib/public-host.ts";
 import { articleJsonLd, blogCollectionJsonLd, pageHead } from "../src/lib/seo.ts";
+import { SITE } from "../src/lib/site.ts";
 import { FALLBACK_EDITORIAL_SLUGS } from "../src/lib/sitemap.ts";
 
 const AI_RETRIEVAL_AGENTS = [
@@ -178,4 +180,48 @@ test("production robots names retrieval bots and still disallows /app", () => {
   const local = robotsTxtForHost("localhost");
   assert.equal(local.includes("User-agent: GPTBot"), false);
   assert.match(local, /User-agent: \*\nAllow: \//);
+});
+
+test("home and blog titles and metas sit in the house length band", () => {
+  const homeTitle = "Business Listing Management for Multi-Location Teams";
+  const blogTitle = "Business listing management blog: NAP and duplicates";
+  const blogDescription =
+    "Business listing management blog from BLM: guides covering NAP, governance, QA, migration, duplicates, Google Business Profile, cost, and agency operations.";
+
+  const home = pageHead({ title: homeTitle, description: SITE.description, path: "/" });
+  const blog = pageHead({ title: blogTitle, description: blogDescription, path: "/blog" });
+  const homeTitleTag = home.meta.find((meta) => meta.title);
+  const homeDescription = home.meta.find((meta) => meta.name === "description");
+  const blogTitleTag = blog.meta.find((meta) => meta.title);
+  const blogDescriptionTag = blog.meta.find((meta) => meta.name === "description");
+
+  assert.equal(homeTitleTag?.title, homeTitle);
+  assert.ok(homeTitle.length >= 50 && homeTitle.length <= 60);
+  assert.match(homeTitle, /Business Listing Management/);
+  assert.equal(homeDescription?.content, SITE.description);
+  assert.ok(SITE.description.length >= 150 && SITE.description.length <= 160);
+  assert.match(SITE.description, /keeps NAP, hours, categories, and duplicates accurate/);
+  assert.match(SITE.description, /Google, Apple, Bing, and key directories/);
+
+  assert.equal(blogTitleTag?.title, blogTitle);
+  assert.ok(blogTitle.length >= 50 && blogTitle.length <= 60);
+  assert.match(blogTitle, /[Bb]usiness listing management/);
+  assert.equal(blogDescriptionTag?.content, blogDescription);
+  assert.ok(blogDescription.length >= 150 && blogDescription.length <= 160);
+
+  const homeSrc = readFileSync(new URL("../src/routes/index.tsx", import.meta.url), "utf8");
+  const blogSrc = readFileSync(new URL("../src/routes/blog/index.tsx", import.meta.url), "utf8");
+  assert.match(homeSrc, /title: "Business Listing Management for Multi-Location Teams"/);
+  assert.match(homeSrc, /description: SITE\.description/);
+  assert.match(blogSrc, /title: "Business listing management blog: NAP and duplicates"/);
+  assert.match(blogSrc, /Business listing management blog from BLM: guides covering NAP, governance, QA, migration, duplicates, Google Business Profile, cost, and agency operations\./);
+
+  const raci = BLOG_POSTS.find((post) => post.slug === "listing-management-raci");
+  assert.equal(raci?.title, "Who owns listing management? A RACI for multi-location teams");
+  assert.equal(
+    raci?.description,
+    "Assign Accountable and Responsible owners for NAP, hours, categories, duplicates, and publisher access so franchisees and agencies cannot fork listings.",
+  );
+  assert.equal(raci?.title.length, 60);
+  assert.equal(raci?.description.length, 152);
 });
