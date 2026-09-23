@@ -350,7 +350,7 @@ function WritePage() {
                 className="mt-1.5"
                 placeholder={`${SITE.domain}${livePath}`}
               />
-              <p className="mt-1.5 text-xs text-muted">Leave blank to use the live path on {SITE.domain}</p>
+              <p className="mt-1.5 text-xs text-muted">Leave blank. New posts self-canonical and enter the sitemap. Only blm-* product-docs may point elsewhere.</p>
             </div>
           </div>
           <div className="mt-4">
