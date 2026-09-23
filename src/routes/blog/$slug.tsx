@@ -14,6 +14,7 @@ import {
   defaultShareImage,
   faqJsonLd,
   pageHead,
+  pageShareImage,
   publicOrigin,
 } from "@/lib/seo";
 import { robotsForBlogSlug } from "@/lib/seo-noindex";
@@ -47,14 +48,18 @@ export const Route = createFileRoute("/blog/$slug")({
     const article = loaderData?.article;
     const description = resolvedArticleDescription(article);
     const origin = publicOrigin();
-    const image = absoluteShareImage(article?.cover_url, origin, defaultShareImage(origin));
+    const path = `/blog/${article?.slug ?? ""}`;
+    const mapped = pageShareImage(path);
+    const image = mapped?.image ?? absoluteShareImage(article?.cover_url, origin, defaultShareImage(origin));
     const dates = articleDates(article?.date ?? "", articleModifiedAt(article));
     return pageHead({
       title: (article?.meta_title || article?.title) ?? "Article",
       description,
-      path: `/blog/${article?.slug ?? ""}`,
+      path,
       canonical: article?.canonical_url || undefined,
       image,
+      imageWidth: mapped?.imageWidth,
+      imageHeight: mapped?.imageHeight,
       type: "article",
       imageAlt: article?.cover_alt?.trim() || article?.title || undefined,
       robots: robotsForBlogSlug(article?.slug),
@@ -71,7 +76,9 @@ function BlogPostPage() {
     source === "static" && markdown
       ? stripDuplicateMarkdownOpener(markdown, answer)
       : markdown;
-  const shareImage = absoluteShareImage(article.cover_url, publicOrigin(), defaultShareImage());
+  const shareImage =
+    pageShareImage(`/blog/${article.slug}`)?.image ??
+    absoluteShareImage(article.cover_url, publicOrigin(), defaultShareImage());
   const author = resolveAuthor(article.author);
   const description = resolvedArticleDescription(article);
 

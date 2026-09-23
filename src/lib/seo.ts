@@ -5,6 +5,32 @@ export const OG_IMAGE_PATH = "/og.png";
 export const OG_IMAGE_WIDTH = "1280";
 export const OG_IMAGE_HEIGHT = "640";
 
+/** Unique Gohan cards. Every other page keeps /og.png at 1280×640. */
+export const PAGE_OG_WIDTH = "1200";
+export const PAGE_OG_HEIGHT = "630";
+export const PAGE_OG_BY_PATH: Record<string, string> = {
+  "/": "/og/home.png",
+  "/blog": "/og/blog.png",
+  "/blog/listing-management-raci": "/og/listing-management-raci.png",
+  "/blog/listing-vendor-migration-checklist": "/og/listing-vendor-migration-checklist.png",
+  "/blog/listing-change-qa-evidence": "/og/listing-change-qa-evidence.png",
+  "/blog/location-open-move-close-playbook": "/og/location-open-move-close-playbook.png",
+  "/blog/how-to-do-google-business-listing-management-at-scale":
+    "/og/how-to-do-google-business-listing-management-at-scale.png",
+};
+
+export function pageShareImage(path: string | undefined | null):
+  | { image: string; imageWidth: string; imageHeight: string }
+  | undefined {
+  const imagePath = PAGE_OG_BY_PATH[(path || "").trim()];
+  if (!imagePath) return undefined;
+  return {
+    image: `${SITE.domain}${imagePath}`,
+    imageWidth: PAGE_OG_WIDTH,
+    imageHeight: PAGE_OG_HEIGHT,
+  };
+}
+
 export function publicOrigin() {
   const explicit = process.env.SITE_URL || process.env.VITE_SITE_URL;
   if (explicit) return String(explicit).replace(/\/+$/, "");
@@ -28,6 +54,9 @@ export function shareMeta(opts: {
   /** Absolute share URL. When set, og:url uses this instead of path. */
   url?: string;
   image?: string;
+  /** Pixel size of `image`. Defaults to the site banner, 1280×640. */
+  imageWidth?: string;
+  imageHeight?: string;
   /** Defaults to website; blog posts should pass "article". */
   type?: string;
   imageAlt?: string;
@@ -37,14 +66,16 @@ export function shareMeta(opts: {
   const image = opts.image ?? defaultShareImage(origin);
   const title = pageTitle(opts.title);
   const imageAlt = (opts.imageAlt || "").trim() || `${SITE.name}: ${SITE.tagline}`;
+  const imageWidth = (opts.imageWidth || "").trim() || OG_IMAGE_WIDTH;
+  const imageHeight = (opts.imageHeight || "").trim() || OG_IMAGE_HEIGHT;
   return [
     { property: "og:type", content: opts.type || "website" },
     { property: "og:site_name", content: SITE.legalName },
     { property: "og:title", content: title },
     { property: "og:description", content: opts.description },
     { property: "og:image", content: image },
-    { property: "og:image:width", content: OG_IMAGE_WIDTH },
-    { property: "og:image:height", content: OG_IMAGE_HEIGHT },
+    { property: "og:image:width", content: imageWidth },
+    { property: "og:image:height", content: imageHeight },
     { property: "og:image:alt", content: imageAlt },
     { property: "og:url", content: url },
     { name: "twitter:card", content: "summary_large_image" },
@@ -112,6 +143,8 @@ export function pageHead(opts: {
   robots?: string;
   /** Absolute HTTPS share image; defaults to site OG banner. */
   image?: string;
+  imageWidth?: string;
+  imageHeight?: string;
   type?: string;
   imageAlt?: string;
   /** Article publish date. Emits article:published_time when set. */
@@ -133,7 +166,13 @@ export function pageHead(opts: {
       { title: pageTitle(opts.title) },
       { name: "description", content: description },
       ...(robots ? [{ name: "robots", content: robots }] : []),
-      ...shareMeta({ ...opts, image, url: canonicalOverride || undefined }),
+      ...shareMeta({
+        ...opts,
+        image,
+        imageWidth: opts.imageWidth,
+        imageHeight: opts.imageHeight,
+        url: canonicalOverride || undefined,
+      }),
       ...(articleTimes
         ? [
             { property: "article:published_time", content: articleTimes.datePublished },

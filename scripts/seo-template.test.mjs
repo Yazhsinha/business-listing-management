@@ -4,7 +4,15 @@ import test from "node:test";
 import { visibleBlogHubCards } from "../src/lib/blog-hub.ts";
 import { BLOG_POSTS } from "../src/lib/content/blog.ts";
 import { robotsTxtForHost } from "../src/lib/public-host.ts";
-import { articleJsonLd, blogCollectionJsonLd, pageHead } from "../src/lib/seo.ts";
+import {
+  articleJsonLd,
+  blogCollectionJsonLd,
+  OG_IMAGE_HEIGHT,
+  OG_IMAGE_WIDTH,
+  PAGE_OG_BY_PATH,
+  pageHead,
+  pageShareImage,
+} from "../src/lib/seo.ts";
 import { SITE } from "../src/lib/site.ts";
 import { FALLBACK_EDITORIAL_SLUGS } from "../src/lib/sitemap.ts";
 
@@ -224,4 +232,54 @@ test("home and blog titles and metas sit in the house length band", () => {
   );
   assert.equal(raci?.title.length, 60);
   assert.equal(raci?.description.length, 152);
+});
+
+test("seven pages use 1200x630 Gohan cards; other pages keep the 1280x640 banner", () => {
+  const paths = Object.keys(PAGE_OG_BY_PATH);
+  assert.deepEqual(paths, [
+    "/",
+    "/blog",
+    "/blog/listing-management-raci",
+    "/blog/listing-vendor-migration-checklist",
+    "/blog/listing-change-qa-evidence",
+    "/blog/location-open-move-close-playbook",
+    "/blog/how-to-do-google-business-listing-management-at-scale",
+  ]);
+
+  for (const path of paths) {
+    const share = pageShareImage(path);
+    const file = PAGE_OG_BY_PATH[path];
+    assert.equal(share?.image, `https://businesslistingmanagement.com${file}`);
+    assert.equal(share?.imageWidth, "1200");
+    assert.equal(share?.imageHeight, "630");
+
+    const png = readFileSync(new URL(`../public${file}`, import.meta.url));
+    assert.equal(png.readUInt32BE(16), 1200);
+    assert.equal(png.readUInt32BE(20), 630);
+
+    const head = pageHead({
+      title: "Share",
+      description: "Share card.",
+      path,
+      ...share,
+    });
+    assert.equal(head.meta.find((meta) => meta.property === "og:image")?.content, share.image);
+    assert.equal(head.meta.find((meta) => meta.property === "og:image:width")?.content, "1200");
+    assert.equal(head.meta.find((meta) => meta.property === "og:image:height")?.content, "630");
+    assert.equal(head.meta.find((meta) => meta.name === "twitter:image")?.content, share.image);
+    assert.equal(head.links.find((link) => link.rel === "image_src")?.href, share.image);
+  }
+
+  assert.equal(pageShareImage("/pricing"), undefined);
+  assert.equal(pageShareImage("/blog/what-is-business-listing-management"), undefined);
+  const fallback = pageHead({
+    title: "Pricing",
+    description: "Listed rates.",
+    path: "/pricing",
+  });
+  assert.match(fallback.meta.find((meta) => meta.property === "og:image")?.content, /\/og\.png$/);
+  assert.equal(fallback.meta.find((meta) => meta.property === "og:image:width")?.content, OG_IMAGE_WIDTH);
+  assert.equal(fallback.meta.find((meta) => meta.property === "og:image:height")?.content, OG_IMAGE_HEIGHT);
+  assert.equal(OG_IMAGE_WIDTH, "1280");
+  assert.equal(OG_IMAGE_HEIGHT, "640");
 });

@@ -4,7 +4,7 @@ import { InnerPage } from "@/components/layout/inner-page";
 import { visibleBlogHubCards } from "@/lib/blog-hub";
 import { loadPublicSite } from "@/lib/cms/public";
 import { BLOG_POSTS } from "@/lib/content/blog";
-import { pageHead, blogCollectionJsonLd, breadcrumbJsonLd } from "@/lib/seo";
+import { pageHead, pageShareImage, blogCollectionJsonLd, breadcrumbJsonLd } from "@/lib/seo";
 import { FALLBACK_EDITORIAL_SLUGS } from "@/lib/sitemap";
 import { JsonLd } from "@/components/json-ld";
 
@@ -18,6 +18,7 @@ export const Route = createFileRoute("/blog/")({
       description:
         "Business listing management blog from BLM: guides covering NAP, governance, QA, migration, duplicates, Google Business Profile, cost, and agency operations.",
       path: "/blog",
+      ...pageShareImage("/blog"),
     }),
   component: BlogIndex,
 });
