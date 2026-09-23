@@ -5,6 +5,7 @@ import { newToken } from "./crypto";
 import { cleanArticleHtml, coverAltMissing, ensureImageAlts, extractTitleFromHtml, googleDocExportUrl, googleDocId, imagesMissingAlt } from "./gdoc";
 import { estimateMinutes, slugify } from "./convert";
 import type { ArticleKind, ArticleStatus, SiteCopy } from "./types";
+import { resolvePublishCanonical } from "@/lib/seo-publish";
 
 function str(v: unknown, fallback = "") {
   return typeof v === "string" ? v : fallback;
@@ -300,7 +301,12 @@ export const cmsSaveArticle = createServerFn({ method: "POST" })
     // Clean without auto-fill first so the publish gate still sees empty alts.
     const cleanedBody = cleanArticleHtml(str(o.body_html), { title, fillEmptyAlts: false });
     const meta_title = str(o.meta_title).trim().slice(0, 70);
-    const canonical_url = str(o.canonical_url).trim().slice(0, 500);
+    const slug = str(o.slug).trim() || slugify(title);
+    const canonical_url = resolvePublishCanonical({
+      slug,
+      kind,
+      canonical_url: str(o.canonical_url).trim().slice(0, 500),
+    });
     const category = str(o.category).trim().slice(0, 80);
     const cover_url = str(o.cover_url).trim() || null;
     const cover_alt = str(o.cover_alt).trim().slice(0, 200);
@@ -332,7 +338,7 @@ export const cmsSaveArticle = createServerFn({ method: "POST" })
     return {
       id: str(o.id) || undefined,
       title,
-      slug: str(o.slug).trim() || slugify(title),
+      slug,
       answer: str(o.answer).trim(),
       description,
       meta_title,
