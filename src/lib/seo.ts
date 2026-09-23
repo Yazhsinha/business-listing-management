@@ -54,6 +54,54 @@ export function shareMeta(opts: {
   ];
 }
 
+/** CMS updated/modified value, when the article model has one. */
+export function articleModifiedAt(
+  article:
+    | {
+        updated_at?: string | null;
+        updated?: string | null;
+        modified?: string | null;
+      }
+    | null
+    | undefined,
+): string | undefined {
+  const value = article?.updated_at || article?.updated || article?.modified || "";
+  const trimmed = value.trim();
+  return trimmed || undefined;
+}
+
+function articleDateMs(value: string): number | null {
+  const trimmed = value.trim();
+  if (/^\d{4}-\d{2}-\d{2}$/.test(trimmed)) {
+    const [year, month, day] = trimmed.split("-").map(Number);
+    const ms = Date.UTC(year, month - 1, day);
+    return Number.isNaN(ms) ? null : ms;
+  }
+  const ms = Date.parse(trimmed);
+  return Number.isNaN(ms) ? null : ms;
+}
+
+/**
+ * dateModified falls back to datePublished and is never earlier than it.
+ * An unparseable modified value is treated as absent.
+ */
+export function articleDates(
+  published: string,
+  modified?: string | null,
+): { datePublished: string; dateModified: string } {
+  const datePublished = published.trim();
+  const candidate = (modified ?? "").trim();
+  if (!candidate || candidate === datePublished) {
+    return { datePublished, dateModified: datePublished };
+  }
+  const publishedMs = articleDateMs(datePublished);
+  const modifiedMs = articleDateMs(candidate);
+  if (publishedMs == null || modifiedMs == null || modifiedMs < publishedMs) {
+    return { datePublished, dateModified: datePublished };
+  }
+  return { datePublished, dateModified: candidate };
+}
+
 export function pageHead(opts: {
   title: string;
   description: string;
@@ -66,6 +114,10 @@ export function pageHead(opts: {
   image?: string;
   type?: string;
   imageAlt?: string;
+  /** Article publish date. Emits article:published_time when set. */
+  published?: string;
+  /** Article updated/modified date. Clamped so it is not earlier than published. */
+  modified?: string;
 }) {
   const description = (opts.description || "").trim();
   const canonicalOverride = (opts.canonical || "").trim();
@@ -74,12 +126,20 @@ export function pageHead(opts: {
     (opts.path ? `${SITE.domain}${opts.path}` : "");
   const image = opts.image || defaultShareImage();
   const robots = opts.robots || deploymentRobotsMeta();
+  const published = (opts.published || "").trim();
+  const articleTimes = published ? articleDates(published, opts.modified) : null;
   return {
     meta: [
       { title: pageTitle(opts.title) },
       { name: "description", content: description },
       ...(robots ? [{ name: "robots", content: robots }] : []),
       ...shareMeta({ ...opts, image, url: canonicalOverride || undefined }),
+      ...(articleTimes
+        ? [
+            { property: "article:published_time", content: articleTimes.datePublished },
+            { property: "article:modified_time", content: articleTimes.dateModified },
+          ]
+        : []),
     ],
     links: [
       { rel: "image_src", href: image },
@@ -149,19 +209,43 @@ export function articleJsonLd(opts: {
   description: string;
   path: string;
   date: string;
+  /** CMS updated/modified value. Omitted values copy datePublished. */
+  modified?: string | null;
   author?: string;
   image?: string;
 }) {
+  const dates = articleDates(opts.date, opts.modified);
   return {
     "@context": "https://schema.org",
     "@type": "Article",
     headline: opts.title,
     description: opts.description,
-    datePublished: opts.date,
+    datePublished: dates.datePublished,
+    dateModified: dates.dateModified,
     author: { "@type": "Person", name: opts.author ?? SITE.editorial },
     publisher: { "@type": "Organization", name: SITE.legalName, url: SITE.domain },
     url: `${SITE.domain}${opts.path}`,
     image: opts.image || defaultShareImage(),
+  };
+}
+
+/** CollectionPage whose ItemList is the blog hub's visible cards, in render order. */
+export function blogCollectionJsonLd(posts: ReadonlyArray<{ slug: string; title: string }>) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    name: "Listing operations, written in complete sentences.",
+    url: `${SITE.domain}/blog`,
+    mainEntity: {
+      "@type": "ItemList",
+      numberOfItems: posts.length,
+      itemListElement: posts.map((post, index) => ({
+        "@type": "ListItem",
+        position: index + 1,
+        name: post.title,
+        url: `${SITE.domain}/blog/${post.slug}`,
+      })),
+    },
   };
 }
 
