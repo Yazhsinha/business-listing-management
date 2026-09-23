@@ -162,10 +162,15 @@ export const loadPublicArticle = createServerFn({ method: "GET" })
         return { source: "redirect" as const, redirectTo: redirected, article: null as unknown as CmsArticle, markdown: "" };
       }
       // Skip seedCmsIfEmpty on public article path for snappy TTFB.
-      const cms = await Promise.race([
-        getArticleBySlug(data.slug, true),
-        new Promise<null>((resolve) => setTimeout(() => resolve(null), 4_000)),
-      ]);
+      // The desk still contains a legacy, bodyless record at the canonical
+      // shortlist slug. The complete source-controlled article is the public
+      // authority for this one URL, so do not let that stale row shadow it.
+      const cms = protectedStaticSlug
+        ? null
+        : await Promise.race([
+            getArticleBySlug(data.slug, true),
+            new Promise<null>((resolve) => setTimeout(() => resolve(null), 4_000)),
+          ]);
       if (cms) {
         const body_html = ensureImageAlts(repairArticleHtml(cms.body_html), cms.title);
         // Opportunistic persist: production has SUPABASE_SECRET_KEY; publishable key cannot write.
