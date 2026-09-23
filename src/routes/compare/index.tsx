@@ -121,7 +121,7 @@ function CompareHub() {
           and the{" "}
           <Link
             to="/blog/$slug"
-            params={{ slug: "best-business-listing-management-software-2026" }}
+            params={{ slug: "blm-before-you-adopt" }}
             className="font-medium text-ink underline-offset-2 hover:underline"
           >
             best business listing management software

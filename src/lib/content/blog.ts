@@ -96,7 +96,7 @@ export const BLOG_POSTS: BlogPost[] = [
       "Starter is $49/month for one location after a 7-day trial; Growth is $149/month for up to 25 locations; Enterprise is custom. Software is only half the story - NAP drift on Apple, Bing, and the directory network is the hidden line item.",
   },
   {
-    slug: "best-business-listing-management-software-2026",
+    slug: "blm-before-you-adopt",
     title: "How to evaluate listing software before you buy",
     description:
       "Evaluate listing software on canonical NAP, Google/Apple/Bing coverage, duplicate workflow, shared workspace, and pricing for your location count.",

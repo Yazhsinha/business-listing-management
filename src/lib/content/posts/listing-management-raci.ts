@@ -43,7 +43,7 @@ Service-area businesses still need the same RACI for name, phone, and service ar
 
 Unclear ownership shows up as familiar tickets: Apple still shows last quarter's hours, Bing has a tracking number, Google has a rename the website never got, and two pins share reviews. Internally it looks like "SEO is down" when the real issue is competing editors.
 
-Fix the org chart before you buy more publisher seats. Software amplifies whoever already has write access. Evaluate tools on whether they support roles and evidence ([how to evaluate listing software before you buy](/blog/best-business-listing-management-software-2026)), not on logo count.
+Fix the org chart before you buy more publisher seats. Software amplifies whoever already has write access. Evaluate tools on whether they support roles and evidence ([what to check before adopting BLM](/blog/blm-before-you-adopt)), not on logo count.
 
 ## FAQ
 

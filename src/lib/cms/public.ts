@@ -125,6 +125,16 @@ export const loadPublicSite = createServerFn({ method: "GET" }).handler(async ()
 export const loadPublicArticle = createServerFn({ method: "GET" })
   .validator((d: unknown) => ({ slug: String((d as { slug?: string })?.slug ?? "") }))
   .handler(async ({ data }) => {
+    // Source-controlled canonical rename. Keep this before CMS/static lookups so
+    // the retired URL can never render a 200, even outside Vercel.
+    if (data.slug === "best-business-listing-management-software-2026") {
+      return {
+        source: "redirect" as const,
+        redirectTo: "blm-before-you-adopt",
+        article: null as unknown as CmsArticle,
+        markdown: "",
+      };
+    }
     // Prefer published CMS so desk/GEO ships land without a static rewrite.
     // Fall back to bundled library posts when CMS has no published row.
     let socialBot = false;
@@ -147,30 +157,19 @@ export const loadPublicArticle = createServerFn({ method: "GET" })
     };
     try {
       const { getArticleBySlug, getArticleRedirect } = await import("./store");
-      const protectedStaticSlug = data.slug === "best-business-listing-management-software-2026";
       // Desk slug renames: honor cms_redirects before CMS/static so old URLs never 200.
-      // The published software shortlist is a permanent canonical URL. Ignore
-      // a stale desk-rename row for this one slug so its article and metadata
-      // remain publicly addressable.
-      const redirected = protectedStaticSlug
-        ? null
-        : await Promise.race([
-            getArticleRedirect(data.slug),
-            new Promise<null>((resolve) => setTimeout(() => resolve(null), 2_000)),
-          ]);
+      const redirected = await Promise.race([
+        getArticleRedirect(data.slug),
+        new Promise<null>((resolve) => setTimeout(() => resolve(null), 2_000)),
+      ]);
       if (redirected) {
         return { source: "redirect" as const, redirectTo: redirected, article: null as unknown as CmsArticle, markdown: "" };
       }
       // Skip seedCmsIfEmpty on public article path for snappy TTFB.
-      // The desk still contains a legacy, bodyless record at the canonical
-      // shortlist slug. The complete source-controlled article is the public
-      // authority for this one URL, so do not let that stale row shadow it.
-      const cms = protectedStaticSlug
-        ? null
-        : await Promise.race([
-            getArticleBySlug(data.slug, true),
-            new Promise<null>((resolve) => setTimeout(() => resolve(null), 4_000)),
-          ]);
+      const cms = await Promise.race([
+        getArticleBySlug(data.slug, true),
+        new Promise<null>((resolve) => setTimeout(() => resolve(null), 4_000)),
+      ]);
       if (cms) {
         const body_html = ensureImageAlts(repairArticleHtml(cms.body_html), cms.title);
         // Opportunistic persist: production has SUPABASE_SECRET_KEY; publishable key cannot write.

@@ -75,13 +75,18 @@
       "statusCode": 301
     },
     {
+      "source": "/blog/best-business-listing-management-software-2026",
+      "destination": "/blog/blm-before-you-adopt",
+      "statusCode": 301
+    },
+    {
       "source": "/best-software",
-      "destination": "/blog/best-business-listing-management-software-2026",
+      "destination": "/blog/blm-before-you-adopt",
       "permanent": true
     },
     {
       "source": "/best",
-      "destination": "/blog/best-business-listing-management-software-2026",
+      "destination": "/blog/blm-before-you-adopt",
       "permanent": true
     }
   ],

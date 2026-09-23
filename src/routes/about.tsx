@@ -13,9 +13,9 @@ import { cn } from "@/lib/utils";
 export const Route = createFileRoute("/about")({
   head: () =>
     pageHead({
-      title: "About BLM — business listing management",
+      title: "About Business Listing Management Software",
       description:
-        "About BLM: independent business listing management software built by Asmit Choudhary. Keep every location accurate across Google, Apple, Bing, and the directory network.",
+        "Learn how BLM helps multi-location teams govern NAP, hours, categories, duplicates, and publisher coverage from one business listing workspace.",
       path: "/about",
     }),
   component: AboutPage,

@@ -7,8 +7,9 @@ import { SITE } from "@/lib/site";
 export const Route = createFileRoute("/privacy")({
   head: () =>
     pageHead({
-      title: "Privacy",
-      description: "Privacy policy for Business Listing Management: how we collect, use, and store lead and account data.",
+      title: "Business Listing Management Privacy Policy",
+      description:
+        "Read how Business Listing Management collects, uses, stores, and protects lead, account, workspace, and product usage data.",
       path: "/privacy",
     }),
   component: PrivacyPage,

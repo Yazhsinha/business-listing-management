@@ -36,7 +36,7 @@ SLAs that get you fired or force you to lie: rank guarantees, "all 80 directorie
 
 Write publisher lag into the agreement. Clients who have only ever used GBP think an edit is instant everywhere. A one-paragraph explainer, plus a link to [Google Business Profile vs. business listings](https://businesslistingmanagement.com/blog/google-business-profile-vs-business-listings), saves a quarterly argument.
 
-Price the SLA. Faster duplicate response and after-hours hours changes are a higher tier, not a personality trait of your account manager. Public software pricing (Starter $49/month, Growth $149/month for 25 locations, Enterprise for agency structure) is the floor for tools; your labor sits on top. See [best business listing management software in 2026](https://businesslistingmanagement.com/blog/best-business-listing-management-software-2026) for how to pick a desk that makes SLAs measurable.
+Price the SLA. Faster duplicate response and after-hours hours changes are a higher tier, not a personality trait of your account manager. Public software pricing (Starter $49/month, Growth $149/month for 25 locations, Enterprise for agency structure) is the floor for tools; your labor sits on top. See [what to check before adopting BLM](https://businesslistingmanagement.com/blog/blm-before-you-adopt) for how to pick a desk that makes SLAs measurable.
 
 ## How should agencies report listing work?
 
@@ -89,7 +89,7 @@ Put the brand on a [listing RACI](/blog/listing-management-raci) before you take
 
 ### Should listing management be a line item or bundled into local SEO?
 
-Make business listing management a named line, even if the invoice is bundled. Clients who cannot see the listing product will cut it first when they want to "keep SEO but pause extras." A score, an SLA, and a report make the line defensible. For the software shortlist you may pitch beside the retainer, keep [best business listing management software in 2026](https://businesslistingmanagement.com/blog/best-business-listing-management-software-2026) in the deck.
+Make business listing management a named line, even if the invoice is bundled. Clients who cannot see the listing product will cut it first when they want to "keep SEO but pause extras." A score, an SLA, and a report make the line defensible. For the product checklist you may pitch beside the retainer, keep [what to check before adopting BLM](https://businesslistingmanagement.com/blog/blm-before-you-adopt) in the deck.
 
 ### How do we handle franchisees who create new Google listings?
 

@@ -14,7 +14,7 @@ import sot from "./listing-source-of-truth-workflow";
 export const POST_BODY: Record<string, string> = {
   "what-is-business-listing-management": what,
   "business-listing-management-pricing-2026": pricing,
-  "best-business-listing-management-software-2026": software,
+  "blm-before-you-adopt": software,
   "google-business-profile-vs-business-listings": gbp,
   "how-to-find-and-fix-duplicate-business-listings": duplicates,
   "business-listing-management-for-agencies": agencies,

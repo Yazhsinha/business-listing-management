@@ -62,7 +62,7 @@ Change control is how you keep NAP accurate after the first cleanup. The cleanup
 
 ### Does software enforce change control automatically?
 
-Only if you configure roles, approvals, and verification. Buying a logo wall without workflow leaves you with faster undocumented edits. Evaluate process fit in [how to evaluate listing software before you buy](/blog/best-business-listing-management-software-2026).
+Only if you configure roles, approvals, and verification. Buying a logo wall without workflow leaves you with faster undocumented edits. Evaluate process fit in [what to check before adopting BLM](/blog/blm-before-you-adopt).
 `;
 
 export default markdown;

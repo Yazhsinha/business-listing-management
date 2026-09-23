@@ -6,8 +6,9 @@ import { pageHead } from "@/lib/seo";
 export const Route = createFileRoute("/cookies")({
   head: () =>
     pageHead({
-      title: "Cookies",
-      description: "Cookie policy for Business Listing Management: session cookies for sign-in and essential site cookies.",
+      title: "Business Listing Management Cookie Policy",
+      description:
+        "Learn which essential and session cookies Business Listing Management uses for sign-in, security, and core site functionality.",
       path: "/cookies",
     }),
   component: CookiesPage,

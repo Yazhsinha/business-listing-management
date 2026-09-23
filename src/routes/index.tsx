@@ -9,7 +9,7 @@ export const Route = createFileRoute("/")({
   loader: () => loadPublicSite(),
   head: () =>
     pageHead({
-      title: "Business Listing Management",
+      title: "Business Listing Management Software for Multi-Location Teams",
       description: SITE.description,
       path: "/",
     }),

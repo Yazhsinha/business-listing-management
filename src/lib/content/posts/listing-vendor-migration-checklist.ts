@@ -1,6 +1,6 @@
 const markdown = `Switching listing vendors is a data and access project, not a logo swap. This checklist covers how to leave one business listing management platform (or a spreadsheet) and land on another without losing claims, review history, or the canonical NAP.
 
-Use the [BLM homepage](/) for the product definition of business listing management, [how to evaluate listing software before you buy](/blog/best-business-listing-management-software-2026) for the buying scorecard, and [BLM pricing: Starter $49 and Growth $149](/blog/business-listing-management-pricing-2026) for listed rates. This page is only the migration sequence.
+Use the [BLM homepage](/) for the product definition of business listing management, [what to check before adopting BLM](/blog/blm-before-you-adopt) for the buying scorecard, and [BLM pricing: Starter $49 and Growth $149](/blog/business-listing-management-pricing-2026) for listed rates. This page is only the migration sequence.
 
 Google's [Business Profile guidelines](https://support.google.com/business/answer/3038177) still govern what you publish during the cutover.
 

@@ -18,12 +18,7 @@ import { robotsForBlogSlug } from "@/lib/seo-noindex";
 import { resolveAuthor } from "@/lib/authors";
 import { AuthorBlock } from "@/components/blog/author-block";
 
-const SHORTLIST_SLUG = "best-business-listing-management-software-2026";
-const SHORTLIST_META_DESCRIPTION =
-  "Compare Yext, Uberall, Synup, BrightLocal, Moz Local, Birdeye, and BLM by publisher coverage, duplicate workflows, governance, pricing, and fit.";
-
 function resolvedArticleDescription(article: { slug?: string; description?: string; answer?: string; title?: string } | null | undefined) {
-  if (article?.slug === SHORTLIST_SLUG) return SHORTLIST_META_DESCRIPTION;
   return (
     article?.description?.trim() ||
     article?.answer?.trim() ||
@@ -49,17 +44,13 @@ export const Route = createFileRoute("/blog/$slug")({
   head: ({ loaderData }) => {
     const article = loaderData?.article;
     const description = resolvedArticleDescription(article);
-    const protectedCanonical = article?.slug === SHORTLIST_SLUG;
     const origin = publicOrigin();
     const image = absoluteShareImage(article?.cover_url, origin, defaultShareImage(origin));
     return pageHead({
       title: (article?.meta_title || article?.title) ?? "Article",
       description,
       path: `/blog/${article?.slug ?? ""}`,
-      // The CMS previously stored /product as this shortlist's canonical.
-      // Keep the public shortlist URL authoritative even if that stale desk
-      // value is still present in the database.
-      canonical: protectedCanonical ? undefined : article?.canonical_url || undefined,
+      canonical: article?.canonical_url || undefined,
       image,
       type: "article",
       imageAlt: article?.cover_alt?.trim() || article?.title || undefined,

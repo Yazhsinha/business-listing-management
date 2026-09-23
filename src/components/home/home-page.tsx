@@ -195,7 +195,7 @@ function QuickAnswer() {
             </Link>
             <Link
               to="/blog/$slug"
-              params={{ slug: "best-business-listing-management-software-2026" }}
+              params={{ slug: "blm-before-you-adopt" }}
               className="inline-flex cursor-pointer items-center gap-1 text-ink-soft underline-offset-2 transition-colors hover:text-ink hover:underline focus-visible:text-ink focus-visible:underline"
             >
               Software evaluation guide

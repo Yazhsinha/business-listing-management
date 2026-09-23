@@ -7,8 +7,9 @@ import { SITE } from "@/lib/site";
 export const Route = createFileRoute("/terms")({
   head: () =>
     pageHead({
-      title: "Terms",
-      description: "Terms of use for Business Listing Management software, audits, and workspaces.",
+      title: "Business Listing Management Terms of Use",
+      description:
+        "Review the terms for using Business Listing Management software, listing audits, accounts, trials, and shared workspaces.",
       path: "/terms",
     }),
   component: TermsPage,
