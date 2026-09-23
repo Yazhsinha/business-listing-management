@@ -29,18 +29,19 @@ type HomeCopy = { lede: string; trialLine: string; faqs: { q: string; a: string 
 const CopyCtx = createContext<HomeCopy | null>(null);
 
 export function HomePage({ copy }: { copy?: HomeCopy }) {
+  const effectiveFaqs = copy?.faqs?.length ? copy.faqs : FAQ;
   return (
     <CopyCtx.Provider value={copy ?? null}>
     <main>
       <JsonLd data={orgJsonLd()} />
       <JsonLd data={softwareJsonLd()} />
       <JsonLd data={websiteJsonLd()} />
-      <JsonLd data={faqJsonLd(FAQ)} />
+      <JsonLd data={faqJsonLd(effectiveFaqs)} />
       <JsonLd
         data={definedTermJsonLd({
-          name: "Business listing management",
+          name: "BLM business listing management software",
           description:
-            "Business listing management is the ongoing process of creating, verifying, and synchronizing a company's name, address, phone (NAP), hours, and categories across search engines, maps, and online directories so every location stays accurate.",
+            `BLM is business listing management software for multi-location teams. It provides one workspace for canonical NAP, publisher coverage, duplicate detection, hours and category monitoring across ${COVERAGE}.`,
           url: `${SITE.domain}/`,
         })}
       />
@@ -163,10 +164,10 @@ function QuickAnswer() {
         <div className="rounded-3xl border border-line bg-cream px-5 py-8 sm:px-10">
           <p className="text-xs font-semibold uppercase tracking-[0.16em] text-brand">Quick answer</p>
           <h2 id="quick-answer-title" className="mt-2 font-display text-2xl font-semibold text-ink sm:text-3xl">
-            What is business listing management?
+            What does BLM software do?
           </h2>
           <p className="mt-4 max-w-3xl text-[17px] leading-relaxed text-ink-soft" data-direct-answer="business-listing-management">
-            Business listing management is the ongoing work of creating, verifying, and synchronizing a company’s name, address, phone (NAP), hours, and categories across search engines, maps, and directories so every location stays accurate. BLM runs that loop for {COVERAGE} from one workspace.
+            BLM gives multi-location teams one workspace to maintain canonical name, address, and phone data, inspect publisher coverage, identify duplicate listings, and monitor hours or category drift across {COVERAGE}.
           </p>
           <ul className="mt-6 grid gap-3 sm:grid-cols-2">
             {[
@@ -205,7 +206,7 @@ function QuickAnswer() {
               Cluster reading
             </p>
             <p className="mt-2 text-sm leading-relaxed text-ink-soft">
-              This homepage owns the commercial definition of business listing management. Use these operator guides for governance, migration, QA, and lifecycle work without creating a second head-term page.
+              This homepage explains the BLM product. Use the operator guides below for governance, migration, QA, and lifecycle workflows that support a BLM rollout.
             </p>
             <ul className="mt-4 grid gap-2 text-sm font-semibold sm:grid-cols-2">
               <li>

@@ -18,6 +18,7 @@ export const Route = createFileRoute("/compare/")({
       description:
         "Compare business listing management software: BLM vs Yext, BrightLocal, Moz Local, Uberall, and Birdeye by job, with equal-weakness notes and dated vendor sources. Independent guides for US teams.",
       path: "/compare",
+      robots: "noindex, follow",
     }),
   component: CompareHub,
 });

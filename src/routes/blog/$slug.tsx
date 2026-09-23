@@ -18,6 +18,20 @@ import { robotsForBlogSlug } from "@/lib/seo-noindex";
 import { resolveAuthor } from "@/lib/authors";
 import { AuthorBlock } from "@/components/blog/author-block";
 
+const SHORTLIST_SLUG = "best-business-listing-management-software-2026";
+const SHORTLIST_META_DESCRIPTION =
+  "Compare Yext, Uberall, Synup, BrightLocal, Moz Local, Birdeye, and BLM by publisher coverage, duplicate workflows, governance, pricing, and fit.";
+
+function resolvedArticleDescription(article: { slug?: string; description?: string; answer?: string; title?: string } | null | undefined) {
+  if (article?.slug === SHORTLIST_SLUG) return SHORTLIST_META_DESCRIPTION;
+  return (
+    article?.description?.trim() ||
+    article?.answer?.trim() ||
+    (article?.title ? `A BLM guide to ${article.title}.` : "") ||
+    "Business listing management guide from BLM."
+  ).slice(0, 170);
+}
+
 export const Route = createFileRoute("/blog/$slug")({
   loader: async ({ params }) => {
     const data = await loadPublicArticle({ data: { slug: params.slug } });
@@ -34,12 +48,7 @@ export const Route = createFileRoute("/blog/$slug")({
   },
   head: ({ loaderData }) => {
     const article = loaderData?.article;
-    const description = (
-      article?.description?.trim() ||
-      article?.answer?.trim() ||
-      (article?.title ? `A BLM guide to ${article.title}.` : "") ||
-      "Business listing management guide from BLM."
-    ).slice(0, 170);
+    const description = resolvedArticleDescription(article);
     const origin = publicOrigin();
     const image = absoluteShareImage(article?.cover_url, origin, defaultShareImage(origin));
     return pageHead({
@@ -65,13 +74,14 @@ function BlogPostPage() {
       : markdown;
   const shareImage = absoluteShareImage(article.cover_url, publicOrigin(), defaultShareImage());
   const author = resolveAuthor(article.author);
+  const description = resolvedArticleDescription(article);
 
   return (
     <SiteShell>
       <JsonLd
         data={articleJsonLd({
           title: article.title,
-          description: article.description,
+          description,
           path: `/blog/${article.slug}`,
           date: article.date,
           author: article.author,

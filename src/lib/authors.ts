@@ -2,7 +2,7 @@ export type AuthorProfile = {
   name: string;
   slug: string;
   bio: string;
-  linkedinUrl: string;
+  linkedinUrl?: string;
   imageSrc?: string;
   imageWebpSrc?: string;
   imageAlt: string;
@@ -11,6 +11,14 @@ export type AuthorProfile = {
 
 /** Canonical author bios for BLM article footers — tuned for business listing management. */
 export const AUTHORS = {
+  editorial: {
+    name: "BLM Editorial",
+    slug: "blm-editorial",
+    bio:
+      "BLM Editorial documents the product's listing workflows, integrations, security controls, pricing, and operating limits for multi-location teams.",
+    imageAlt: "BLM Editorial",
+    initials: "BLM",
+  },
   asmit: {
     name: "Asmit Choudhary",
     slug: "asmit-choudhary",
@@ -38,13 +46,13 @@ export const AUTHORS = {
 const ALIASES: Record<string, keyof typeof AUTHORS> = {
   "asmit choudhary": "asmit",
   asmit: "asmit",
-  "blm editorial": "asmit",
-  editorial: "asmit",
+  "blm editorial": "editorial",
+  editorial: "editorial",
   "sandeep kumar": "sandeep",
   sandeep: "sandeep",
 };
 
 export function resolveAuthor(authorName: string | null | undefined): AuthorProfile {
-  const key = ALIASES[(authorName ?? "").trim().toLowerCase()] ?? "asmit";
+  const key = ALIASES[(authorName ?? "").trim().toLowerCase()] ?? "editorial";
   return AUTHORS[key];
 }

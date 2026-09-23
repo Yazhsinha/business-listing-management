@@ -6,7 +6,6 @@ import { InnerPage } from "@/components/layout/inner-page";
 import { LeadForm } from "@/components/lead-form";
 import { Button } from "@/components/ui/button";
 import {
-  BOOK_CALL_EMAIL,
   BOOKING_SCHEDULE_URL,
   googleCalendarBookUrl,
   hasBookingSchedule,
@@ -85,7 +84,7 @@ function BookPage() {
             <p className="text-sm font-semibold text-ink">Leave your details</p>
             <p className="mt-1 text-sm text-muted">
               Tell us who you are and which locations matter. We record the lead, then you pick a time on the calendar
-              with {BOOK_CALL_EMAIL}.
+              with a BLM product specialist.
             </p>
             <div className="mt-5">
               <LeadForm
@@ -105,7 +104,7 @@ function BookPage() {
                 <>
                   <p className="text-sm font-semibold text-ink">Pick a date and time</p>
                   <p className="mt-2 text-sm leading-relaxed text-ink-soft">
-                    Choose a slot on the live calendar below. Host: {BOOK_CALL_EMAIL}.
+                    Choose a slot on the live BLM calendar below.
                   </p>
                   <div className="mt-5 overflow-hidden rounded-2xl bg-paper hairline">
                     <iframe
@@ -139,7 +138,7 @@ function BookPage() {
                   <p className="text-sm font-semibold text-ink">Booking calendar</p>
                   <p className="mt-2 text-sm leading-relaxed text-ink-soft">
                     The live booking calendar with dates and times loads from the appointment schedule URL once it is
-                    configured. Until then, open a calendar invite hosted by {BOOK_CALL_EMAIL}.
+                    configured. Until then, open a calendar invite and choose a time that works for your team.
                   </p>
                   <div className="mt-5 flex flex-col gap-3 sm:flex-row">
                     <Button asChild size="lg">

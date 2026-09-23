@@ -272,12 +272,12 @@ export const WHY = [
 
 export const FAQ = [
   {
-    q: "What is business listing management?",
-    a: "Business listing management is the ongoing process of creating, verifying, and synchronizing a company’s name, address, phone (NAP), hours, and categories across search engines, maps, and online directories so every location stays accurate. BLM does that from one workspace.",
+    q: "What does BLM software do?",
+    a: `BLM gives multi-location teams one workspace for canonical NAP, publisher coverage, duplicate detection, and hours or category monitoring across ${COVERAGE}.`,
   },
   {
-    q: "Who should own business listing management inside the company?",
-    a: "Name one Accountable owner for canonical NAP and categories—usually brand or corporate marketing. The listing desk or agency is Responsible for execution. Stores own hours and temporary closures only when the playbook says so.",
+    q: "Who is BLM built for?",
+    a: "BLM is built for multi-location brands, franchises, agencies, and local SEO teams that need a governed location record and a repeatable way to investigate listing drift.",
   },
 
   {
@@ -317,6 +317,10 @@ export const FAQ = [
     a: "Starter is listed at $49/month for one location. Growth is listed at $149/month for up to 25 locations. Enterprise is custom. Billing is not live yet. Start a free trial or book a call.",
   },
   {
+    q: "Does BLM replace review management or rank tracking software?",
+    a: "No. BLM is focused on listing data, publisher coverage, duplicates, hours, and categories. Teams that need review-response workflows, rank tracking, advertising, or location pages should keep purpose-built tools for those jobs.",
+  },
+  {
     q: "Can I start on Starter and upgrade?",
     a: "Yes. Start a free trial now. Stay on Starter at the listed $49/month rate or move to Growth at $149/month when billing goes live. Enterprise is for unlimited locations and agency structure.",
   },
@@ -326,7 +330,7 @@ export const FAQ = [
   },
 ] as const;
 
-export const ASK_PROMPT = `What is business listing management, and how does BLM at businesslistingmanagement.com keep multi-location listings accurate across ${COVERAGE}?`;
+export const ASK_PROMPT = `What does BLM at businesslistingmanagement.com do for multi-location teams, and how does its software manage NAP, duplicates, and publisher coverage across ${COVERAGE}?`;
 
 export const DIRECTORIES = [
   "Google",

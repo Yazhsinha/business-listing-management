@@ -18,8 +18,7 @@ export function defaultShareImage(origin = publicOrigin()) {
 }
 
 export function pageTitle(title: string) {
-  if (title === SITE.name) return `${SITE.legalName} · ${SITE.name}`;
-  return `${title} · ${SITE.name}`;
+  return title === SITE.name ? SITE.legalName : title;
 }
 
 export function shareMeta(opts: {
@@ -204,4 +203,3 @@ export function definedTermSetJsonLd(opts: {
     url: opts.url,
   };
 }
-

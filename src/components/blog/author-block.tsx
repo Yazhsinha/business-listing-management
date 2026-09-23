@@ -54,15 +54,17 @@ export function AuthorBlock({ author }: { author: AuthorProfile }) {
             {author.name}
           </h2>
           <p className="mt-3 text-[15px] leading-relaxed text-ink-soft sm:text-base">{author.bio}</p>
-          <a
-            href={author.linkedinUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-ink underline-offset-4 transition hover:text-brand hover:underline"
-          >
-            <LinkedInIcon className="size-4 text-[#0A66C2]" />
-            LinkedIn
-          </a>
+          {author.linkedinUrl ? (
+            <a
+              href={author.linkedinUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-ink underline-offset-4 transition hover:text-brand hover:underline"
+            >
+              <LinkedInIcon className="size-4 text-[#0A66C2]" />
+              LinkedIn
+            </a>
+          ) : null}
         </div>
       </div>
     </aside>

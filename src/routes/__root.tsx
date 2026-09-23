@@ -20,7 +20,7 @@ export const Route = createRootRoute({
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: `${SITE.legalName} · ${SITE.name}` },
+      { title: SITE.legalName },
       { name: "description", content: SITE.description },
       { name: "theme-color", content: "#f4f1ea" },
       { name: "google-site-verification", content: "SANgNulrO0igNLnWomn54tf-G9uZr7EsL01oN56JWwo" },

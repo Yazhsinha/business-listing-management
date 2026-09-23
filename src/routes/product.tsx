@@ -245,9 +245,8 @@ function ProductPage() {
           <p>
             Buy BLM when the hard part is keeping dozens or hundreds of storefronts consistent across Google, Apple,
             Bing, and directories with a small ops team. Skip it if you need a full enterprise knowledge graph, custom
-            publisher contracts in dozens of countries, or a managed agency to file every correction for you. Compare
-            pages on this site state those tradeoffs plainly; independent software shortlists belong on
-            locallistingsmanagement.co, not here.
+            publisher contracts in dozens of countries, or a managed agency to file every correction for you. Product
+            comparisons on this site explain those tradeoffs without presenting BLM as a neutral industry publisher.
           </p>
           <h2 className="font-display text-2xl font-semibold text-ink">Onboarding without theater</h2>
           <p>

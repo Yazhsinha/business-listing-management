@@ -268,9 +268,8 @@ function Independence() {
                 BLM is an independent product.
               </h2>
               <p className="mt-3 max-w-2xl text-[15px] leading-relaxed text-cream/85">
-                We are not a Synup or Nakama reseller, and we do not publish as their affiliate. Reviews and
-                comparisons stay equal-weakness on purpose — so operators can trust the page, not the
-                partnership logo.
+                BLM is built and operated as its own software product. Product claims are tied to documented
+                capabilities, published limits, and terms that buyers can verify before they commit.
               </p>
             </div>
           </div>
@@ -316,16 +315,8 @@ function BuiltBy() {
             <div className="flex flex-col justify-center gap-5 p-8 sm:p-10">
               <p className="text-[17px] leading-relaxed text-ink-soft">
                 {SITE.author} built BLM. He holds a B.Tech in Mechanical Engineering from IIT Roorkee (2026)
-                and has interned at Ninjacart and Deloitte. He also edits the independent{" "}
-                <a
-                  href="https://locallistingsmanagement.co"
-                  target="_blank"
-                  rel="noreferrer"
-                  className="font-medium text-ink underline-offset-2 hover:underline"
-                >
-                  Local Listings Management
-                </a>{" "}
-                publication.
+                and has interned at Ninjacart and Deloitte. His work on BLM focuses on the product, its listing
+                data workflows, and the operating needs of multi-location teams.
               </p>
               <p className="text-[17px] leading-relaxed text-ink-soft">
                 The brief is simple: build business listing management software operators actually open on a
