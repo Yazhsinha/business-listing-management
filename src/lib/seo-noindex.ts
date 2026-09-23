@@ -1,23 +1,15 @@
 /**
  * Conservative noindex denylist for BLM (businesslistingmanagement.com).
  *
- * GSC (asmit@nakama.in) was not reachable this run (Google session expired;
- * Sep 17 audits also blocked). Semrush MCP errored. Plausible has no API key.
- *
- * Only paths with strong non-GSC evidence of being useless / doorway / orphan
- * are listed. Head-term + money URLs stay indexable for the USA skyrocket push.
+ * Restore pass (2026-09-24 room stamp): the five editorial /blog orphans were
+ * re-indexed (self-canonical + sitemap). Compare doorways stay noindex.
  */
 export const NOINDEX_FOLLOW = "noindex, follow";
 
 /** Blog slugs that should emit noindex,follow and stay out of the sitemap. */
 export const NOINDEX_BLOG_SLUGS = new Set<string>([
-  // Orphan quarantine (published CMS, not in sitemap)
-  "how-to-do-google-business-listing-management-at-scale",
-  // Thin ops stubs / commercial twins (not head-term money cluster)
-  "listing-management-raci",
-  "listing-change-qa-evidence",
-  "location-open-move-close-playbook",
-  "listing-vendor-migration-checklist",
+  // Empty after 2026-09-24 restore. Product-doc blm-* pages stay product-canonicaled
+  // (not listed here). Query aliases stay 301s.
 ]);
 
 /** Pathnames (no origin) that should emit noindex,follow. */
@@ -43,11 +35,8 @@ export function robotsForBlogSlug(slug: string | undefined | null): string | und
 
 export function reasonForNoindex(pathOrSlug: string): string {
   const p = pathOrSlug.startsWith("/") ? pathOrSlug : `/blog/${pathOrSlug}`;
-  if (p.includes("at-scale")) {
-    return "Orphan: live 200 + self-canonical but absent from sitemap; Sep 17 audit quarantine. GSC metrics unavailable this run.";
-  }
   if (p.startsWith("/compare/")) {
-    return "Thin compare doorway template; Sep 17 surgical audit doorway cluster. GSC metrics unavailable this run.";
+    return "Thin compare doorway template; Sep 17 surgical audit doorway cluster.";
   }
-  return "Thin ops stub / cross-host twin intent (Sep 17 matrix). Not part of head-term money cluster. GSC metrics unavailable this run.";
+  return "Listed in NOINDEX_PATHS / NOINDEX_BLOG_SLUGS.";
 }
