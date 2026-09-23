@@ -147,11 +147,17 @@ export const loadPublicArticle = createServerFn({ method: "GET" })
     };
     try {
       const { getArticleBySlug, getArticleRedirect } = await import("./store");
+      const protectedStaticSlug = data.slug === "best-business-listing-management-software-2026";
       // Desk slug renames: honor cms_redirects before CMS/static so old URLs never 200.
-      const redirected = await Promise.race([
-        getArticleRedirect(data.slug),
-        new Promise<null>((resolve) => setTimeout(() => resolve(null), 2_000)),
-      ]);
+      // The published software shortlist is a permanent canonical URL. Ignore
+      // a stale desk-rename row for this one slug so its article and metadata
+      // remain publicly addressable.
+      const redirected = protectedStaticSlug
+        ? null
+        : await Promise.race([
+            getArticleRedirect(data.slug),
+            new Promise<null>((resolve) => setTimeout(() => resolve(null), 2_000)),
+          ]);
       if (redirected) {
         return { source: "redirect" as const, redirectTo: redirected, article: null as unknown as CmsArticle, markdown: "" };
       }
