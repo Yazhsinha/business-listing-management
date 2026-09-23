@@ -76,9 +76,7 @@ function BlogPostPage() {
     source === "static" && markdown
       ? stripDuplicateMarkdownOpener(markdown, answer)
       : markdown;
-  const shareImage =
-    pageShareImage(`/blog/${article.slug}`)?.image ??
-    absoluteShareImage(article.cover_url, publicOrigin(), defaultShareImage());
+  const shareImage = absoluteShareImage(article.cover_url, publicOrigin(), defaultShareImage());
   const author = resolveAuthor(article.author);
   const description = resolvedArticleDescription(article);
 
